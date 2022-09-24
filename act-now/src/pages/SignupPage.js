@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { createUserWithEmailAndPassword, sendEmailVerification} from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 import {auth} from '../firebase/firebase'
 
 export default function SignupPage() {
@@ -9,10 +10,13 @@ export default function SignupPage() {
 	const [passwordAgain, setPasswordAgain] = useState("")
     const [loading, setLoading] = useState(false);
 
+    const navigate = useNavigate();
+
     async function onFormSubmit(e) {
         e.preventDefault();
         if (password !== passwordAgain){
-            alert("passwords do not match!")
+            alert("passwords do not match!");
+            return;
         }
 
         setLoading(true)
@@ -25,7 +29,7 @@ export default function SignupPage() {
             if (userCred.user !== null){
                 sendEmailVerification(userCred.user).then(()=>{
                         alert('email send')
-                        //add redirection
+                        navigate("/login");
                     }
                 );
             }
@@ -47,11 +51,11 @@ export default function SignupPage() {
                     </div>
                     <div className="mb-3">
                         <div>Password:</div>
-                        <input type="text" className="form-control" value={password} onChange={e => setPassword(e.target.value)} placeholder='Password' required/>
+                        <input type="password" className="form-control" value={password} onChange={e => setPassword(e.target.value)} placeholder='Password' required/>
                     </div>
                     <div className="mb-3">
                         <div>Confirm Password:</div>
-                        <input type="text" className="form-control" value={passwordAgain} onChange={e => setPasswordAgain(e.target.value)} placeholder='Password' required/>
+                        <input type="password" className="form-control" value={passwordAgain} onChange={e => setPasswordAgain(e.target.value)} placeholder='Password' required/>
                     </div>
                     <button type="submit" className='btn btn-dark'>Submit</button>
                 </form>
