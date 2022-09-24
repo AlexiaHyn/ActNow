@@ -11,7 +11,7 @@
     color: #212121;
 }
 
-.button-container{
+.button-container {
     position: relative;
     width: 100vw;
     height: 60vh;
@@ -26,78 +26,185 @@
     min-width: 120px;
     min-height: 120px;
     transition: all 1s ease;
-
 }
 
 .button1 {
-    background-color: #FFCBCB;
-    left: 40%;
-    top: 5%;
+
+    background-color: #e9ecef;
+    left: 38%;
+    top: 10%;
 }
 
 .button2 {
-    background-color: #CCE8C5;
-    left: 55%;
-    top: 10%;
+    background-color: #b2f2bb;
+    left: 50%;
+    top: 5%;
 
 }
 
 .button3 {
-    background-color: #C4D5EF;
+    background-color: #ffd8a8;
+
     left: 30%;
-    top: 40%;
+    top: 35%;
 
 }
 
 .button4 {
-    background-color: #CBCADF;
-    left: 60%;
-    top: 50%;
+    background-color: #ffc9c9;
+    left: 58%;
+    top: 37%;
 
 }
 
 .button5 {
-    background-color: #FFF0CB;
-    left: 45%;
-    top: 55%;
+    background-color: #fcc2d7;
+    left: 46%;
+    top: 37%;
 
+}
+
+.button6 {
+    background-color: #eebefa;
+    left: 25%;
+    top: 2%;
+}
+
+.button7 {
+    background-color: #d0bfff;
+    left: 62%;
+    top: 1%;
+
+}
+
+.button8 {
+    background-color: #bac8ff;
+    left: 28%;
+    top: 70%;
+
+}
+
+.button9 {
+    background-color: #a5d8ff;
+    left: 65%;
+    top: 64%;
+
+}
+
+.button10 {
+    background-color: #99e9f2;
+    left: 40%;
+    top: 65%;
+}
+
+.button11 {
+    background-color: #ffec99;
+
+    left: 53%;
+    top: 68%;
+
+}
+
+.button12 {
+    background-color: #96f2d7;
+    left: 70%;
+    top: 33%;
 }
 
 @media screen and (max-width: 800px) {
+
+    .button {
+        font-size: 10px;
+        width: 5vw;
+        height: 5vw;
+        min-width: 80px;
+        min-height: 80px;
+    }
+
     .button1 {
-        background-color: #FFCBCB;
-        left: 20%;
-        top: 10%;
+
+        background-color: #e9ecef;
+        left: 42%;
+        top: 3%;
     }
+
     .button2 {
-        background-color: #CCE8C5;
-        left: 55%;
-        top: 20%;
-    
+        background-color: #b2f2bb;
+        left: 65%;
+        top: 5%;
+
     }
-    
+
     .button3 {
-        background-color: #C4D5EF;
-        left: 10%;
-        top: 40%;
-    
+        background-color: #ffd8a8;
+
+        left: 31%;
+        top: 23%;
+
     }
-    
+
     .button4 {
-        background-color: #CBCADF;
-        left: 60%;
-        top: 50%;
-    
+        background-color: #ffc9c9;
+        left: 64%;
+        top: 53%;
+
     }
-    
+
     .button5 {
-        background-color: #FFF0CB;
-        left: 30%;
+        background-color: #fcc2d7;
+        left: 8%;
+        top: 26%;
+
+    }
+
+    .button6 {
+        background-color: #eebefa;
+        left: 18%;
+        top: 6%;
+    }
+
+    .button7 {
+        background-color: #d0bfff;
+        left: 55%;
+        top: 25%;
+
+    }
+
+    .button8 {
+        background-color: #bac8ff;
+        left: 10%;
+        top: 47%;
+
+    }
+
+    .button9 {
+        background-color: #a5d8ff;
+        left: 76%;
+        top: 35%;
+
+    }
+
+    .button10 {
+        background-color: #99e9f2;
+        left: 25%;
         top: 65%;
-    
+    }
+
+    .button11 {
+        background-color: #ffec99;
+
+        left: 48%;
+        top: 69%;
+
+    }
+
+    .button12 {
+        background-color: #96f2d7;
+        left: 39%;
+        top: 45%;
     }
 }
-    
+
 
 .continue {
 
