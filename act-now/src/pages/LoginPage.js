@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {signInWithEmailAndPassword} from "firebase/auth";
 import {auth} from '../firebase/firebase'
 
@@ -8,6 +9,8 @@ export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    const [buttonMsg, setBtnMsg] = useState("Login")
+    const navigate = useNavigate();
 
     async function onFormSubmit(e){
         e.preventDefault();
@@ -23,6 +26,7 @@ export default function LoginPage() {
             alert(err.message);
         }
         setLoading(false);
+        navigate("/");
     }
 
   return (
@@ -32,14 +36,13 @@ export default function LoginPage() {
             <form onSubmit={onFormSubmit}>
                 <div className="mb-3">
                     <div>Email:</div>
-                    <input type="email" className="form-control" placeholder='abc@rice.edu' value={email} onChange={(e) => setEmail(e.target.value)} required/>
-                    <div>*We prefer Rice GMail account.</div>
+                    <input type="email" className="form-control" placeholder='***@rice.edu' value={email} onChange={(e) => setEmail(e.target.value)} required/>
                 </div>
                 <div className="mb-3">
                     <div>Password:</div>
-                    <input type="text" className="form-control" placeholder='******' value={password} onChange={(e) => setPassword(e.target.value)} required/>
+                    <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                 </div>
-                <button type="submit" className='btn btn-dark'>Login</button>
+                <button type="submit" className='btn btn-dark'>{buttonMsg}</button>
             </form>
         </div>
     </div>

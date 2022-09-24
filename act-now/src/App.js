@@ -43,7 +43,7 @@ function App() {
 
   return (
    <BrowserRouter>
-    <Navbar/>
+    <Navbar user={user}/>
     <Routes>
       <Route element={
           <RequireAuth user={user}>

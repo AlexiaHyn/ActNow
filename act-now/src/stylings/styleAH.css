@@ -12,6 +12,10 @@
 
 .event-card{
     width: 400px;
-    padding: 15px;
+    padding: 20px;
     margin: 10px;
+}
+
+.cursor{
+    cursor: pointer;
 }
