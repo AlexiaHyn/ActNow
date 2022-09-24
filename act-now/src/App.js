@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import HomePage from './pages/HomePage';
@@ -10,6 +9,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import SignupPage from './pages/SignupPage';
 import MainPage from './pages/MainPage';
 import PreferencePage from './pages/PreferencePage';
+import EventPage from './pages/EventPage';
 import RequireAuth from './components/RequireAuth';
 import { db, auth } from './firebase/firebase';
 import React, { useEffect, useState } from 'react';
@@ -67,6 +67,7 @@ function App() {
         <Route element={<HomePage />} path='/home'></Route>
         <Route element={<LoginPage />} path='/login'></Route>
         <Route element={<SignupPage />} path='/signup'></Route>
+        <Route element={<EventPage />} path='/event'></Route>
       </Routes>
 
     </div>
