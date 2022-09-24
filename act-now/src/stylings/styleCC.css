@@ -1,0 +1,131 @@
+.prefTitle {
+
+    width: 350px;
+    height: 100px;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 120%;
+    margin: auto;
+    /* or 38px */
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+
+    color: #212121;
+
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+
+}
+
+
+.subtitle {
+
+    width: 350px;
+    height: 25px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 140%;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.2px;
+    margin: auto;
+
+    color: #212121;
+
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.button {
+    border-radius: 50%;
+    border: none;
+    position: absolute;
+    width: 128px;
+    height: 128px;
+
+    flex: none;
+    flex-grow: 0;
+
+}
+
+.button1 {
+    background-color: #FFCBCB;
+    left: 25%;
+    top: 30%;
+
+    order: 3;
+    z-index: 3;
+}
+
+.button2 {
+    background-color: #CCE8C5;
+    left: 60%;
+    top: 40%;
+
+    order: 4;
+    z-index: 4;
+}
+
+.button3 {
+    background-color: #C4D5EF;
+    left: 10%;
+    top: 50%;
+
+    order: 5;
+    z-index: 5;
+}
+
+.button4 {
+    background-color: #CBCADF;
+    left: 60%;
+    top: 63%;
+
+    order: 7;
+    z-index: 7;
+}
+
+.button5 {
+    background-color: #FFF0CB;
+    left: 20%;
+    top: 500px;
+
+    order: 6;
+    z-index: 6;
+}
+
+.continue {
+    bottom: 1px;
+    position: absolute;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    left: 23px;
+
+    width: 350px;
+    height: 58px;
+
+    background: #000000;
+    border: none;
+
+    box-shadow: 4px 8px 24px rgba(36, 107, 253, 0.25);
+    border-radius: 100px;
+
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+    color: white;
+}
