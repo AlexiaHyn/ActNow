@@ -24,8 +24,7 @@ export default function SignupPage() {
             );
             if (userCred.user !== null){
                 sendEmailVerification(userCred.user).then(()=>{
-                        alert('email send')
-                        //add redirection
+                        alert('email send');
                     }
                 );
             }
