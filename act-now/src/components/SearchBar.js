@@ -11,11 +11,12 @@ export default function SearchBar() {
         freeSolo
         id="free-solo-2-demo"
         disableClearable
-        options={topics.map((option) => option.title)}
+        // options={topics.map((option) => option.title)}
+        options={topics}
         renderInput={(params) => (
           <TextField
             {...params}
-            placeholder="Search input"
+            label="Search input"
             InputProps={{
               ...params.InputProps,
               type: 'search',

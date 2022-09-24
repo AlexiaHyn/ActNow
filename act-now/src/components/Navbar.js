@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate, useLocation} from "react-router-dom";
 
-export default function NavBar() {
+export default function NavBar(props) {
     const router = useNavigate()
     const location = useLocation()
     const [homePage, setHomePage] = useState(true)

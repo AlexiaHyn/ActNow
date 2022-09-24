@@ -5,9 +5,16 @@ import EventCard from '../components/EventCard';
 export default function MainPage() {
   return (
     <div>
-      {/* <SearchBar/> */}
-      <EventCard/>
-
+      <SearchBar/>
+      <div className='d-flex flex-wrap'>
+        <EventCard/>
+        <EventCard/>
+        <EventCard/>
+        <EventCard/>
+        <EventCard/>
+        <EventCard/>
+      </div>
+    
     </div>
   )
 }
