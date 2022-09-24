@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import { Route, Routes} from "react-router-dom";
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import Navbar from './components/Navbar';
@@ -10,20 +10,21 @@ import "bootstrap/dist/css/bootstrap.css";
 import SignupPage from './pages/SignupPage';
 import MainPage from './pages/MainPage';
 import RequireAuth from './components/RequireAuth';
-import { createBrowserHistory } from "history";
-import { auth } from './firebase/firebase';
+import { db, auth } from './firebase/firebase';
 import React, { useEffect, useState } from 'react';
 import { onAuthStateChanged , deleteUser} from 'firebase/auth';
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { createBrowserHistory } from "history";
+
 
 function App() {
   const [user, setUser] = useState(null);
   const [isUserUpdated, setIsUserUpdated] = useState(false);
 
-  const history = createBrowserHistory()
-
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if(user){
+        const history = createBrowserHistory()
         if(!user.emailVerified && history.location.pathname.includes('/signup')){
           auth.signOut();
           return
@@ -32,18 +33,27 @@ function App() {
           alert("attempt to login email without verification");
           auth.signOut();
           return;
-          //deleteUser(user);
         }
+        const docRef = doc(db, "user", user.uid);
+        getDoc(docRef).then((docSnap) => {
+          if(!docSnap.exists()){
+            setDoc(doc(db, "user", user.uid), {
+              name: "",
+              //To be added
+            }).then(
+              //send to preference page
+            );
+          }
+        })
       }
-      console.log('success update')
       setUser(user);
       setIsUserUpdated(true);
     });
   }, []);
 
   return (
-   <BrowserRouter>
-    <Navbar user={user}/>
+    <div>
+    <Navbar/>
     <Routes>
       <Route element={
           <RequireAuth user={user}>
@@ -55,7 +65,7 @@ function App() {
       <Route element={<LoginPage/>} path='/login'></Route>
       <Route element={<SignupPage/>} path='/signup'></Route>
     </Routes>
-   </BrowserRouter>
+   </div>
   );
 }
 
