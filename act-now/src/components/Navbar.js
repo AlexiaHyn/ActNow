@@ -34,7 +34,11 @@ export default function NavBar(props) {
                         <div className='d-flex align-items-center'> 
                         {
                             props.user ?
-                            <button className='btn btn-outline-light' onClick={() => {auth.signOut()}}>Sign Out</button>
+                            <>
+                                <button className='btn btn-outline-light' onClick={() => {auth.signOut()}}>Sign Out</button>
+                                <div className='headshot mx-2' onClick={()=>router("/profile")}></div>
+                            </>
+                            
                             :
                             <>
                                 <button className='btn btn-light mx-1' onClick={()=>router("/signup")}>Sign Up</button>

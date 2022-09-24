@@ -51,6 +51,14 @@
     min-height: 150px;
 }
 
+.headshot{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: dimgray;
+    cursor: pointer;
+}
+
 .input{
     border: none;
     border-bottom: 1px solid #212121;
