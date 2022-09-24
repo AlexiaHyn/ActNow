@@ -13,7 +13,7 @@ import RequireAuth from './components/RequireAuth';
 import { useState } from 'react';
 
 function App() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(true);
   return (
    <BrowserRouter>
     <Navbar/>
