@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import Navbar from './components/Navbar';
@@ -55,20 +55,20 @@ function App() {
   return (
     <div>
       <Navbar user={user} />
-      <BrowserRouter>
-        <Routes>
-          <Route element={
-            <RequireAuth user={user}>
-              <MainPage user={user} />
-            </RequireAuth>
-          } path='/' />
 
-          <Route element={<PreferencePage />} path='/preference'></Route>
-          <Route element={<HomePage />} path='/home'></Route>
-          <Route element={<LoginPage />} path='/login'></Route>
-          <Route element={<SignupPage />} path='/signup'></Route>
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route element={
+          <RequireAuth user={user}>
+            <MainPage user={user} />
+          </RequireAuth>
+        } path='/' />
+
+        <Route element={<PreferencePage />} path='/preference'></Route>
+        <Route element={<HomePage />} path='/home'></Route>
+        <Route element={<LoginPage />} path='/login'></Route>
+        <Route element={<SignupPage />} path='/signup'></Route>
+      </Routes>
+
     </div>
   );
 }
