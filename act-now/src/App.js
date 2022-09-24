@@ -53,7 +53,7 @@ function App() {
 
   return (
     <div>
-    <Navbar/>
+    <Navbar user={user}/>
     <Routes>
       <Route element={
           <RequireAuth user={user}>

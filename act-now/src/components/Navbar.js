@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate, useLocation} from "react-router-dom";
 import Logo from './Logo';
+import {auth} from '../firebase/firebase'
 
 export default function NavBar(props) {
     const router = useNavigate()
@@ -33,7 +34,7 @@ export default function NavBar(props) {
                         <div className='d-flex align-items-center'> 
                         {
                             props.user ?
-                            <button className='btn btn-outline-light'>Sign Out</button>
+                            <button className='btn btn-outline-light' onClick={() => {auth.signOut()}}>Sign Out</button>
                             :
                             <>
                                 <button className='btn btn-light mx-1' onClick={()=>router("/signup")}>Sign Up</button>
