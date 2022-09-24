@@ -11,6 +11,7 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import MainPage from './pages/MainPage';
 import PreferencePage from './pages/PreferencePage';
+import EventPage from './pages/EventPage';
 import SetProfilePage from './pages/SetProfilePage';
 
 import RequireAuth from './components/RequireAuth';
@@ -72,6 +73,9 @@ function App() {
         <Route element={<LoginPage />} path='/login'></Route>
         <Route element={<SignupPage />} path='/signup'></Route>
         <Route element={<SetProfilePage user={user}/>} path='/setprofile'></Route>
+        <Route element={<EventPage />} path='/event'></Route>
+        <Route element={<SetProfilePage user={user}/>} path='/setprofile'></Route>
+
       </Routes>
 
     </div>
