@@ -20,6 +20,14 @@
     cursor: pointer;
 }
 
+.lg-view{
+    display:inline-block;
+ }
+
+ .sm-lg-view{
+    display:none;
+ }
+
 @media screen and (max-width: 1200px) {
     .lg-view{
        display:none;
@@ -28,18 +36,22 @@
     .sm-lg-view{
        display:inline-block;
     }
-  }
-  
-@media screen and (max-width: 800px) {
-.md-view{
-    display:none;
-}
-
-.sm-md-view{
-    display:inline-block;
-}
 }
 
 .poppins{
     font-family: 'Poppins', sans-serif;
+}
+
+.profile-pic{
+    width: 15vw;
+    height: 15vw;
+    background-color: gainsboro;
+    border-radius: 50%;
+    min-width: 150px;
+    min-height: 150px;
+}
+
+.input{
+    border: none;
+    border-bottom: 1px solid #212121;
 }
