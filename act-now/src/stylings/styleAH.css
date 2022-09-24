@@ -19,3 +19,27 @@
 .cursor{
     cursor: pointer;
 }
+
+@media screen and (max-width: 1200px) {
+    .lg-view{
+       display:none;
+    }
+  
+    .sm-lg-view{
+       display:inline-block;
+    }
+  }
+  
+@media screen and (max-width: 800px) {
+.md-view{
+    display:none;
+}
+
+.sm-md-view{
+    display:inline-block;
+}
+}
+
+.poppins{
+    font-family: 'Poppins', sans-serif;
+}
