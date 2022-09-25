@@ -6,7 +6,7 @@ import logo5 from "../images/social policy.png"
 import logo6 from "../images/education.png"
 import logo7 from "../images/poverty.png"
 import logo8 from "../images/animal.png"
-import logo8 from "../images/peace.png"
+import logo9 from "../images/peace.png"
 import logo10 from "../images/energy.png"
 import logo11 from "../images/gender equality.png"
 
