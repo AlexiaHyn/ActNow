@@ -83,7 +83,7 @@ function App() {
             } path='/setprofile'></Route>
             <Route element={
               <RequireAuth user={user}>
-                <EventPage />
+                <EventPage user={user}/>
               </RequireAuth>
             } path='/events/:id'></Route>
             <Route element={

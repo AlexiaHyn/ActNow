@@ -58,7 +58,7 @@ export default function EventCard(props) {
     <div className='card rounded event-card poppins'>
       <div className='d-flex justify-content-between mb-3'>
         <h3>{props.title}</h3>
-        <i className={"cursor bi bi-star" + `${collected ? "-fill" : ""}`} onClick={() => handleStar(!collected)}></i>
+        <i className={"cursor bi bi-star" + `${collected ? "-fill" : ""}`} onClick={() => handleStar()}></i>
       </div>
       <div className='d-flex'>
           <div className='fw-bold'>Time:</div>
@@ -74,8 +74,8 @@ export default function EventCard(props) {
         {tags.map((tag, idx)=> {return <div key={idx} className="m-1 text-info"> {"#" + tag} </div>})}
       </div>
       <div className='d-flex align-items-center justify-content-end'>
-        <button type='button' className={'btn btn-outline-secondary'} onClick={() => navigate(`${'/events/' + props.id}`)}>Learn more</button>
-        <button type='button' className={'btn ms-1 ' + `${going ? "btn-outline-dark" : "btn-dark"}`} onClick={() => setGoing(!going)}>
+        <button type='button' className={'btn btn-outline-secondary'} onClick={() => navigate(`${'/events/' + props.id}`, {state: {id: props.id, user: props.user, tags: tags}})}>Learn more</button>
+        <button type='button' className={'btn ms-1 ' + `${going ? "btn-outline-dark" : "btn-dark"}`} onClick={() => handleJoin()}>
           {
             going ?
               "Cancel Going"
