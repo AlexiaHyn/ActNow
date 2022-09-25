@@ -21,8 +21,7 @@ export default function EventCard(props) {
             going ?
               "Cancel Going"
               :
-              "Going"
-
+              "Join"
           }
         </button>
 

@@ -123,10 +123,9 @@ export default function ProfilePage(props) {
             <div style={{width: "100%"}} className="tab-pane fade" id="pills-disabled" role="tabpanel" aria-labelledby="pills-setting-tab" tabIndex="0">
               <div className='d-flex justify-content-center'>
                 <div className='p-4'>
-                  <div className='d-flex mb-3'>
+                  <div className='d-flex mb-3 align-items-center'>
                     <div className='me-2'>My Password:</div>
-                    <input type="password" className='border border-secondary rounded input' disabled={NoPasswordAccess}></input>
-                    <i className="bi bi-pen cursor ms-3" onClick={()=>setPasswordAccess(!NoPasswordAccess)}></i>
+                    <button type='button' className='btn btn-secondary rounded'>Reset Password</button>
                   </div>
 
                   <div className='d-flex align-items-center'>
