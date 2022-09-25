@@ -19,8 +19,11 @@ export default function MainPage() {
 
       <div className='d-flex flex-wrap'>
         {recList.map((item, i) => (<EventCard title={item.title} intro={item.intro} tags={item.tags} />))}
-
       </div>
+      <div className='d-flex justify-content-center my-3'>
+        <button type='submit' className='btn border-0 bg-transparent'>Click to Load More...</button>
+      </div>
+      
       <div className='initiate-wrapper'>
         <InitiateEvent />
       </div>
