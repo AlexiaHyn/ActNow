@@ -12,8 +12,9 @@
 
 .event-card{
     width: 400px;
-    padding: 20px;
+    padding: 25px;
     margin: 10px;
+    box-shadow:  4px 6px 10px rgba(36, 107, 253, 0.25);
 }
 
 .cursor{
