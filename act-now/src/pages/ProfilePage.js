@@ -2,6 +2,8 @@ import React, { useState, useEffect} from 'react';
 import {db, storage} from '../firebase/firebase'
 import {ref, uploadBytesResumable, getDownloadURL} from "firebase/storage";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import {auth} from '../firebase/firebase'
+import { sendPasswordResetEmail } from 'firebase/auth';
 
 export default function ProfilePage(props) {
     const [name, setName] = useState("");
@@ -21,6 +23,21 @@ export default function ProfilePage(props) {
         if(docSnap.exists()){
           setName(docSnap.data()['name']);
           setURL(docSnap.data()['profileImage']);
+          const pref = docSnap.data()['preferences'];
+          let newArray = [false, false, false, false,false, false,false, false, false, false,false, false];
+          newArray[0] = pref['Gender Equality'];
+          newArray[1] = pref['Environment'];
+          newArray[2] = pref['LGBTQ+'];
+          newArray[3] = pref['Racial Justice'];
+          newArray[4] = pref['Health'];
+          newArray[5] = pref['Social Policy'];
+          newArray[6] = pref['Civil Rights'];
+          newArray[7] = pref['Education'];
+          newArray[8] = pref['Poverty'];
+          newArray[9] = pref['Animals'];
+          newArray[10] = pref['Anti-War'];
+          newArray[11] = pref['Energy'];
+          setPreferences(newArray);
         }
       });
       }
@@ -77,7 +94,32 @@ export default function ProfilePage(props) {
       setPreferences(newArr);
     }
 
+    function handleReset(e){
+      e.preventDefault();
+      sendPasswordResetEmail(auth, props.user.email).then(() => {
+        alert('send reset email')
+      })
+    }
 
+    async function handlePrefSet(e){
+      e.preventDefault();
+      const userRef = doc(db, "user", props.user.uid);
+      await setDoc(userRef, {
+        preferences: {'Gender Equality': preferences[0], 
+                      'Environment': preferences[1],
+                      'LGBTQ+': preferences[2],
+                      'Racial Justice': preferences[3],
+                      'Health': preferences[4],
+                      'Social Policy': preferences[5],
+                      'Civil Rights': preferences[6],
+                      'Education': preferences[7],
+                      'Poverty': preferences[8],
+                      'Animals': preferences[9],
+                      'Anti-War': preferences[10],
+                      'Energy': preferences[11],}
+    }, {merge : true});
+    setEditPreference(true);
+    }
   return (
     <div className='white-background d-flex flex-column align-items-center poppins pt-5'>
         <form className='d-flex align-items-center mt-4' onSubmit={handleSubmit}>
@@ -124,27 +166,27 @@ export default function ProfilePage(props) {
                 <div className='p-4'>
                   <div className='d-flex mb-3 align-items-center'>
                     <div className='me-2'>My Password:</div>
-                    <button type='button' className='btn btn-secondary rounded'>Reset Password</button>
+                    <button type='button' className='btn btn-secondary rounded' onClick={handleReset}>Reset Password</button>
                   </div>
 
                   <div className='d-flex align-items-center'>
                     <div>My Preferences:</div>
                     <i className="bi bi-pen cursor ms-3" onClick={()=>setEditPreference(!notEditPreference)}></i>
                   </div>
-                  <form>
+                  <form onSubmit={handlePrefSet}>
                     <div className='d-flex flex-wrap'>
-                      <button type="button" className={"my-2 mx-1 btn " + `${preferences[0] ? "btn-dark" : "btn-outline-dark"}`} onClick={() => {handleChange(0)}}  disabled={notEditPreference}>Gender Equality</button>
-                      <button type="button" className={"my-2 mx-1 btn " + `${preferences[1] ? "btn-dark" : "btn-outline-dark"}`} onClick={() => {handleChange(1)}}  disabled={notEditPreference}>Environment</button>
-                      <button type="button" className={"my-2 mx-1 btn " + `${preferences[2] ? "btn-dark" : "btn-outline-dark"}`} onClick={() => {handleChange(2)}}  disabled={notEditPreference}>LGBTQ+</button>
-                      <button type="button" className={"my-2 mx-1 btn " + `${preferences[3] ? "btn-dark" : "btn-outline-dark"}`} onClick={() => {handleChange(3)}}  disabled={notEditPreference}>Racial Justice</button>
-                      <button type="button" className={"my-2 mx-1 btn " + `${preferences[4] ? "btn-dark" : "btn-outline-dark"}`} onClick={() => {handleChange(4)}}  disabled={notEditPreference}>Health</button>
-                      <button type="button" className={"my-2 mx-1 btn " + `${preferences[5] ? "btn-dark" : "btn-outline-dark"}`} onClick={() => {handleChange(5)}}  disabled={notEditPreference}>Social Policy</button>
-                      <button type="button" className={"my-2 mx-1 btn " + `${preferences[6] ? "btn-dark" : "btn-outline-dark"}`} onClick={() => {handleChange(6)}}  disabled={notEditPreference}>Civil Rights</button>
-                      <button type="button" className={"my-2 mx-1 btn " + `${preferences[7] ? "btn-dark" : "btn-outline-dark"}`} onClick={() => {handleChange(7)}}  disabled={notEditPreference}>Education</button>
-                      <button type="button" className={"my-2 mx-1 btn " + `${preferences[8] ? "btn-dark" : "btn-outline-dark"}`} onClick={() => {handleChange(8)}}  disabled={notEditPreference}>Poverty</button>
-                      <button type="button" className={"my-2 mx-1 btn " + `${preferences[9] ? "btn-dark" : "btn-outline-dark"}`} onClick={() => {handleChange(9)}}  disabled={notEditPreference}>Animals</button>
-                      <button type="button" className={"my-2 mx-1 btn " + `${preferences[10] ? "btn-dark" : "btn-outline-dark"}`} onClick={() => {handleChange(10)}} disabled={notEditPreference}>Anti-War</button>
-                      <button type="button" className={"my-2 mx-1 btn " + `${preferences[11] ? "btn-dark" : "btn-outline-dark"}`} onClick={() => {handleChange(11)}} disabled={notEditPreference}>Energy</button>
+                      <button type="button" className={"my-2 mx-1 btn " + `${preferences[0] ? "btn-dark" : "btn-outline-dark"}`} onClick={() => {handleChange(0)}}  disabled={notEditPreference}>#Gender Equality</button>
+                      <button type="button" className={"my-2 mx-1 btn " + `${preferences[1] ? "btn-dark" : "btn-outline-dark"}`} onClick={() => {handleChange(1)}}  disabled={notEditPreference}>#Environment</button>
+                      <button type="button" className={"my-2 mx-1 btn " + `${preferences[2] ? "btn-dark" : "btn-outline-dark"}`} onClick={() => {handleChange(2)}}  disabled={notEditPreference}>#LGBTQ+</button>
+                      <button type="button" className={"my-2 mx-1 btn " + `${preferences[3] ? "btn-dark" : "btn-outline-dark"}`} onClick={() => {handleChange(3)}}  disabled={notEditPreference}>#Racial Justice</button>
+                      <button type="button" className={"my-2 mx-1 btn " + `${preferences[4] ? "btn-dark" : "btn-outline-dark"}`} onClick={() => {handleChange(4)}}  disabled={notEditPreference}>#Health</button>
+                      <button type="button" className={"my-2 mx-1 btn " + `${preferences[5] ? "btn-dark" : "btn-outline-dark"}`} onClick={() => {handleChange(5)}}  disabled={notEditPreference}>#Social Policy</button>
+                      <button type="button" className={"my-2 mx-1 btn " + `${preferences[6] ? "btn-dark" : "btn-outline-dark"}`} onClick={() => {handleChange(6)}}  disabled={notEditPreference}>#Civil Rights</button>
+                      <button type="button" className={"my-2 mx-1 btn " + `${preferences[7] ? "btn-dark" : "btn-outline-dark"}`} onClick={() => {handleChange(7)}}  disabled={notEditPreference}>#Education</button>
+                      <button type="button" className={"my-2 mx-1 btn " + `${preferences[8] ? "btn-dark" : "btn-outline-dark"}`} onClick={() => {handleChange(8)}}  disabled={notEditPreference}>#Poverty</button>
+                      <button type="button" className={"my-2 mx-1 btn " + `${preferences[9] ? "btn-dark" : "btn-outline-dark"}`} onClick={() => {handleChange(9)}}  disabled={notEditPreference}>#Animals</button>
+                      <button type="button" className={"my-2 mx-1 btn " + `${preferences[10] ? "btn-dark" : "btn-outline-dark"}`} onClick={() => {handleChange(10)}} disabled={notEditPreference}>#Anti-War</button>
+                      <button type="button" className={"my-2 mx-1 btn " + `${preferences[11] ? "btn-dark" : "btn-outline-dark"}`} onClick={() => {handleChange(11)}} disabled={notEditPreference}>#Energy</button>
                     </div>
                     <div className='d-flex justify-content-end my-2'>
                       <button type='submit' className='btn btn-dark p-2 px-3' style={{borderRadius: "20px"}} hidden={notEditPreference}>Save Changes</button>
