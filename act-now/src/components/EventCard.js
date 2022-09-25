@@ -2,26 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom';
 import {db} from '../firebase/firebase';
 import { deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
+import { logoDict } from './EventLogo';
 
 export default function EventCard(props) {
   const [collected, setCollected] = useState(false);
   const [going, setGoing] = useState(false);
   const [tags, setTags] = useState([]);
   let navigate = useNavigate();
-
-  
-  var logodict = {'Gender Equality': <img src={"../images/gender equality.png"} style={{objectFit: "contain", maxHeight: "40px"}}></img>,
-  'Environment': <img src={"../images/environment.png"} style={{objectFit: "contain", maxHeight: "40px"}}></img>,
-  'LGBTQ+': <img src={"../images/lgbtq+.png"} style={{objectFit: "contain", maxHeight: "40px"}}></img>,
-  'Racial Justice': <img src={"../images/racial justice.png"} style={{objectFit: "contain", maxHeight: "40px"}}></img>,
-  'Health': <img src={"../images/health.png"} style={{objectFit: "contain", maxHeight: "40px"}}></img>,
-  'Social Policy': <img src={"../images/social policy.png"} style={{objectFit: "contain", maxHeight: "40px"}}></img>,
-  'Civil Rights': <img src={"../images/racial justice.png"} style={{objectFit: "contain", maxHeight: "40px"}}></img>,
-  'Education': <img src={"../images/education.png"} style={{objectFit: "contain", maxHeight: "40px"}}></img>,
-  'Poverty': <img src={"../images/poverty.png"} style={{objectFit: "contain", maxHeight: "40px"}}></img>,
-  'Animals': <img src={"../images/animal.png"} style={{objectFit: "contain", maxHeight: "40px"}}></img>,
-  'Anti-War': <img src={"../images/peace.png"} style={{objectFit: "contain", maxHeight: "40px"}}></img>,
-  'Energy': <img src={"../images/energy.png"} style={{objectFit: "contain", maxHeight: "40px"}}></img>}
 
   useEffect(()=>{
     handleTags(props.tags);
@@ -85,7 +72,15 @@ export default function EventCard(props) {
         </div>
       <div>{props.intro}</div>
       <div className='d-flex flex-wrap mb-3'>
-        {tags.map((tag, idx)=> {return <div key={idx} className="m-1 text-info"> {"#" + tag} </div>})}
+        {tags.map((tag, idx)=> {return <div key={idx} className="m-2 text-info"> 
+            <div className='d-flex'>
+              <div style={{width: "20px", height: "20px", overflow: "hidden"}}>
+                <img src={logoDict[tag]} style={{objectFit: "contain", maxHeight: "100%"}}></img>
+              </div>
+              {"#" + tag}
+            </div>
+             
+        </div>})}
       </div>
       <div className='d-flex align-items-center justify-content-end'>
         <button type='button' className={'btn btn-outline-secondary'} onClick={() => navigate(`${'/events/' + props.id}`, {state: {id: props.id, user: props.user, tags: tags}})}>Learn more</button>
