@@ -2,14 +2,25 @@ import React from 'react';
 import SearchBar from '../components/SearchBar';
 import EventCard from '../components/EventCard';
 import InitiateEvent from '../components/InitiateEvent';
+import { collection, query, where, getDocs } from "firebase/firestore";
+import {db} from '../firebase/firebase'
+import React, { useEffect, useState } from 'react'
 
 export default function MainPage() {
 
-  const recList = [{ "title": "Women's chat", "intro": "Come and join us for a great sister time!", "tags": ["Gender Equality"] },
-  { "title": "Tutor for grade 6-8 kids from low income family", "intro": "We host weekly tutor sessions for kids from low income families. We need grade 6-8 math, science, and English tutors.", "tags": ["Education"] },
-  { "title": "Mental Illness Awareness Association", "intro": "Join our organization meetings to find creative ways to help spread mental illness awareness across campus.", "tags": ["Health"] },
-  { "title": "Mural Painting for Pride Month", "intro": "Come paint the walls on campus to send positive messages to our community, in celebration of the pride month.", "tags":["LGPTQ+"] },
-  { "title": "Climate March", "intro": "Join the Climate March on Sunday with your Rice classmates", "tags": ["Environmental"] }]
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    const q = query(collection(db, "events"));
+    getDocs(q).then((snapshots) => {
+      let newArr = []
+      snapshots.forEach((doc) => {
+        const docData = doc.data();
+        newArr.push(<EventCard title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tag={docData['tags']} id={docData['id']} creator={docData['creator']}/>);
+      });
+      setCards(newArr);
+    });
+  }, []);
 
   return (
     <div className='pt-5 Poppins'>
