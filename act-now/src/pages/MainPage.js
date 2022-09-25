@@ -11,6 +11,7 @@ export default function MainPage(props) {
 
   const [cards, setCards] = useState([]);
   const [num, setNum] = useState(50);
+  const [selectValue, setSelectedValue] = useState("0");
 
   useEffect(() => {
     const q = query(collection(db, "events"), limit(num));
@@ -60,6 +61,54 @@ export default function MainPage(props) {
     });
   };
 
+  const sortCards = (e) => {
+    const selected = e.target.value;
+    const recList = [];
+
+    console.log(props.user.uid);
+
+    if (selected == "0") {
+
+      const preferenceLst = [];
+      // Get user preferences
+      const userq = query(collection(db, "user"), where("uid", "==", props.user.uid));
+      getDocs(userq).then((snapshots) => {
+        let newArr = []
+        snapshots.forEach((doc) => {
+          const docData = doc.data();
+          console.log(docData);
+        });
+      });
+
+
+      const q = query(collection(db, "events"));
+      getDocs(q).then((snapshots) => {
+        let newArr = []
+        snapshots.forEach((doc) => {
+          const tagsArray = [];
+          const docData = doc.data();
+          for (let tag in docData['tags']) {
+            if (docData['tags'][tag] == true) {
+              tagsArray.push(tag);
+            }
+          }
+          if (tagsArray.includes(searchTag)) {
+            newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user} />);
+          }
+        });
+        setCards(newArr);
+      });
+
+
+      for (let tag in props.user) {
+        recList.push(tag);
+        console.log(recList);
+      }
+
+    }
+    setSelectedValue(e.target.value);
+  }
+
   return (
     <div className='pt-5 poppins'>
       <div className='initiate-wrapper'>
@@ -70,7 +119,7 @@ export default function MainPage(props) {
         <SearchBar searchCards={searchCards} />
       </div>
 
-      <select className="form-select m-2" style={{ width: "20vw", minWidth: "180px", position: "relative" }}>
+      <select className="form-select m-2" style={{ width: "20vw", minWidth: "180px", position: "relative" }} value={selectValue} onChange={sortCards}>
         <option value="0">Recommended</option>
         <option value="1">Hot</option>
         <option value="2">Latest</option>
