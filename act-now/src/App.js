@@ -43,6 +43,7 @@ function App() {
         const docRef = doc(db, "user", user.uid);
         getDoc(docRef).then((docSnap) => {
           if (!docSnap.exists()) {
+            //delete once the preference page is done
             setDoc(doc(db, "user", user.uid), {
               name: "",
               //To be added
@@ -55,13 +56,15 @@ function App() {
       setUser(user);
       setIsUserUpdated(true);
     });
+
   }, []);
 
   return (
     <div>
       <Navbar user={user} />
-
-      <Routes>
+      {
+        isUserUpdated?
+        <Routes>
         <Route element={
           <RequireAuth user={user}>
             <MainPage user={user} />
@@ -104,6 +107,12 @@ function App() {
         <Route element={<SignupPage />} path='/signup'></Route>
         
       </Routes>
+      :
+      "Loading"
+
+      }
+
+      
 
     </div>
   );

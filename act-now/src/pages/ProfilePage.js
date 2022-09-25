@@ -1,14 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import {db, storage} from '../firebase/firebase'
 import {ref, uploadBytesResumable, getDownloadURL} from "firebase/storage";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 export default function ProfilePage(props) {
     const [name, setName] = useState("");
     const [readOnly, setReadOnly] = useState(true);
     const [file, setFile] = useState(null);
     const [imgURL, setURL] = useState("");
-    const [progress, setProgress] = useState(-1)
+    const [progress, setProgress] = useState(-1);
+    
+    useEffect(() => {
+      if (props.user){
+        const userRef = doc(db, "user", props.user.uid);
+      getDoc(userRef).then((docSnap)=>{
+        if(docSnap.exists()){
+          setName(docSnap.data()['name']);
+          setURL(docSnap.data()['profileImage']);
+        }
+      });
+      }
+    }, [props.user]);
     function handleImageChange(e){
         e.preventDefault();
         const choose = e.target.files[0];
@@ -23,8 +35,9 @@ export default function ProfilePage(props) {
     }
 
     async function handleSubmit(e){
-      e.preventDefault();
       const userRef = doc(db, "user", props.user.uid);
+      e.preventDefault();
+      
       await setDoc(userRef, {name: name}, {merge: true});
 
       if(file){
