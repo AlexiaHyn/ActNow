@@ -77,6 +77,10 @@
     color: #212121;
 }
 
+.input:focus{
+    box-shadow:  4px 8px 24px rgba(36, 107, 253, 0.25);
+}
+
 .nav-pills .nav-item .nav-link.active {
     background-color: #383838;
   }
@@ -84,6 +88,7 @@
 .nav-pills .nav-item .nav-link{
     color: #212121;
 }
+
 
 .line-segment{
     border-bottom: 2px solid #d5d5d5;
