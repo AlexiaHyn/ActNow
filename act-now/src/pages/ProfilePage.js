@@ -5,6 +5,7 @@ import { doc, getDoc, setDoc, getDocs, query, collection} from "firebase/firesto
 import {auth} from '../firebase/firebase'
 import { sendPasswordResetEmail } from 'firebase/auth';
 import EventCard from '../components/EventCard';
+import Tooltip from '@mui/material/Tooltip';
 
 export default function ProfilePage(props) {
     const [name, setName] = useState("");
@@ -53,8 +54,10 @@ export default function ProfilePage(props) {
           const eventID = docsnap.data()['eventID'];
           const eventDoc = doc(db, "events", eventID);
           getDoc(eventDoc).then((docSnap) => {
-            const docData = docSnap.data();
-            newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
+            if(docSnap.exists()){
+              const docData = docSnap.data();
+              newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
+            }
           });
         })
         setCreate([...create], newArr)
@@ -66,8 +69,10 @@ export default function ProfilePage(props) {
           const eventID = docsnap.data()['eventID'];
           const eventDoc = doc(db, "events", eventID);
           getDoc(eventDoc).then((docSnap) => {
-            const docData = docSnap.data();
-            newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
+            if(docSnap.exists()){
+              const docData = docSnap.data();
+              newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
+            }
           });
         })
         setJoined([...joined], newArr)
@@ -79,8 +84,10 @@ export default function ProfilePage(props) {
           const eventID = docsnap.data()['eventID'];
           const eventDoc = doc(db, "events", eventID);
           getDoc(eventDoc).then((docSnap) => {
-            const docData = docSnap.data();
-            newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
+            if(docSnap.exists()){
+              const docData = docSnap.data();
+              newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
+            }
           });
         })
         setStarred([...starred], newArr)
@@ -176,7 +183,9 @@ export default function ProfilePage(props) {
             </div>
             <div className='d-flex'>
                 <input className='input border-0 text-center fs-4' style={{maxWidth: "150px"}} placeholder='UserName' value={name} onChange={(e) => setName(e.target.value)} required readOnly={readOnly}></input>
-                <i className="bi bi-pen cursor pt-2" onClick={()=>setReadOnly(false)}></i>
+                <Tooltip title="Edit Profile Pic or User Name">
+                  <i className="bi bi-pen cursor pt-2" onClick={()=>setReadOnly(false)}></i>
+                </Tooltip>
             </div>
             
             <button type='submit' className='btn btn-dark p-2 px-5 mx-3' style={{borderRadius: "20px"}} hidden={readOnly}>{"Save Changes"}</button>
@@ -226,7 +235,9 @@ export default function ProfilePage(props) {
 
                   <div className='d-flex align-items-center'>
                     <div>My Preferences:</div>
-                    <i className="bi bi-pen cursor ms-3" onClick={()=>setEditPreference(!notEditPreference)}></i>
+                    <Tooltip title="Edit Preferences">
+                      <i className="bi bi-pen cursor ms-3" onClick={()=>setEditPreference(!notEditPreference)}></i>
+                    </Tooltip>
                   </div>
                   <form onSubmit={handlePrefSet}>
                     <div className='d-flex flex-wrap'>

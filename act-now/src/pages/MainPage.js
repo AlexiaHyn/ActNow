@@ -69,8 +69,8 @@ export default function MainPage(props) {
       <div className='pt-3'>
         <SearchBar searchCards={searchCards} />
       </div>
-
-      <select className="form-select m-2" style={{ width: "20vw", minWidth: "180px", position: "relative" }}>
+      
+      <select className="form-select m-2" style={{ width: "20vw", minWidth: "180px", position: "Relative", paddingInline: "30px"}}>
         <option value="0">Recommended</option>
         <option value="1">Hot</option>
         <option value="2">Latest</option>
