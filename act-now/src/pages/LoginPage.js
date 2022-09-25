@@ -32,17 +32,21 @@ export default function LoginPage() {
   return (
     <div className='white-background d-flex justify-content-center align-items-center poppins'>
         <div className='card border-0 p-3'>
-            <h2>Login</h2>
+            <h1 className='fw-bold'>Login</h1>
+            <h5 className='mb-3'>Please Login to continue</h5>
             <form onSubmit={onFormSubmit}>
                 <div className="mb-3">
-                    <div>Email:</div>
+                    <div className='fw-bold'>Email:</div>
                     <input type="email" className="form-control" placeholder='***@rice.edu' value={email} onChange={(e) => setEmail(e.target.value)} required/>
                 </div>
                 <div className="mb-3">
-                    <div>Password:</div>
+                    <div className='fw-bold'>Password:</div>
                     <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                 </div>
-                <button type="submit" className='btn btn-dark'>{buttonMsg}</button>
+                <div className='d-flex justify-content-end'>
+                    <button type="submit" className='btn btn-dark'>{buttonMsg}</button>
+                </div>
+                
             </form>
         </div>
     </div>
