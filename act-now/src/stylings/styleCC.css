@@ -218,15 +218,7 @@
 }
 
 .event {
-
-    padding: 20px;
-    margin: 10px;
-    height: 50%;
     width: 80%;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
 }
 
 .fixed-btn0 {
