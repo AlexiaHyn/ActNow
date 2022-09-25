@@ -40,7 +40,9 @@ export default function InitiatePage(props) {
              'Anti-War': preferences[10],
              'Energy': preferences[11],}
     });
-    await setDoc(doc(db, 'events', docRef.id), {id:docRef.id}, {merge: true})
+    await setDoc(doc(db, 'events', docRef.id), {id:docRef.id}, {merge: true});
+    const userRef = doc(db, 'user', props.user.uid, 'create', docRef.id);
+    await setDoc(userRef, {eventID: docRef.id});
     alert('event added');
     navigate("/");
   }
