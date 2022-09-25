@@ -9,7 +9,6 @@ export default function ProfilePage(props) {
     const [file, setFile] = useState(null);
     const [imgURL, setURL] = useState("");
     const [progress, setProgress] = useState(-1);
-    const [NoPasswordAccess, setPasswordAccess] = useState(true);
     const [notEditPreference, setEditPreference] = useState(true);
 
     const [preferences, setPreferences] = useState([false, false, false, false,false, false,false, false,

@@ -30,7 +30,7 @@ export default function NavBar(props) {
         }
     }, [props.user]);
   return (
-    <div className='poppins' style={{position: "fixed", width: "100%"}}>
+    <div className='poppins' style={{position: "fixed", width: "100%", zIndex: 999}}>
         <nav className="navbar navbar-expand-lg navbar-dark bg-black roboto">
             <div className="container-fluid">
                 <a className="navbar-brand ps-3" href="/">
