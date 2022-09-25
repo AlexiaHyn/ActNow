@@ -1,9 +1,10 @@
 import React, { useState, useEffect} from 'react';
 import {db, storage} from '../firebase/firebase'
 import {ref, uploadBytesResumable, getDownloadURL} from "firebase/storage";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, getDocs, query, collection} from "firebase/firestore";
 import {auth} from '../firebase/firebase'
 import { sendPasswordResetEmail } from 'firebase/auth';
+import EventCard from '../components/EventCard';
 
 export default function ProfilePage(props) {
     const [name, setName] = useState("");
@@ -45,6 +46,45 @@ export default function ProfilePage(props) {
         }
       });
       }
+      const q1 = query(collection(db, "user", props.user.uid, "create"));
+      getDocs(q1).then((snapshots) => {
+        let newArr = [];
+        snapshots.forEach((docsnap) => {
+          const eventID = docsnap.data()['eventID'];
+          const eventDoc = doc(db, "events", eventID);
+          getDoc(eventDoc).then((docSnap) => {
+            const docData = docSnap.data();
+            newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
+          });
+        })
+        setCreate(newArr)
+      })
+      const q2 = query(collection(db, "user", props.user.uid, "joined"));
+      getDocs(q2).then((snapshots) => {
+        let newArr = [];
+        snapshots.forEach((docsnap) => {
+          const eventID = docsnap.data()['eventID'];
+          const eventDoc = doc(db, "events", eventID);
+          getDoc(eventDoc).then((docSnap) => {
+            const docData = docSnap.data();
+            newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
+          });
+        })
+        setJoined(newArr)
+      })
+      const q3 = query(collection(db, "user", props.user.uid, "starred"));
+      getDocs(q3).then((snapshots) => {
+        let newArr = [];
+        snapshots.forEach((docsnap) => {
+          const eventID = docsnap.data()['eventID'];
+          const eventDoc = doc(db, "events", eventID);
+          getDoc(eventDoc).then((docSnap) => {
+            const docData = docSnap.data();
+            newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
+          });
+        })
+        setStarred(newArr)
+      })
     }, [props.user]);
     function handleImageChange(e){
         e.preventDefault();
