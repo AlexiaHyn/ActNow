@@ -197,7 +197,7 @@ export default function MainPage(props) {
         <SearchBar searchCards={searchCards} />
       </div>
 
-      <select className="form-select m-2" style={{ width: "20vw", minWidth: "180px", position: "relative" }} value={selectValue} onChange={sortCards}>
+      <select className="form-select m-2 ms-5" style={{ width: "20vw", minWidth: "180px", position: "relative" }} value={selectValue} onChange={sortCards}>
 
         <option value="0">Recommended</option>
         <option value="1">Hot</option>
