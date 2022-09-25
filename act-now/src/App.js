@@ -46,9 +46,9 @@ function App() {
           if (!docSnap.exists()) {
             setDoc(doc(db, "user", user.uid), {
               id: user.uid,
-            }).then(() => {
-              navigate("/setprofile");
-            }
+              //To be added
+            }).then(
+              window.location="/setprofile"
             );
           }
         })

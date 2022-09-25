@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import '../stylings/styleCC.css';
 import {useState} from 'react';
 import { doc, setDoc } from "firebase/firestore";
@@ -30,6 +30,7 @@ export default function PreferencePage(props) {
                               'Energy': preferences[11],}
             }, {merge : true});
         }
+        window.location="/";
     }
 
     function handleChange(index){
