@@ -2,7 +2,7 @@ import React from 'react';
 import SearchBar from '../components/SearchBar';
 import EventCard from '../components/EventCard';
 import InitiateEvent from '../components/InitiateEvent';
-import { collection, query, where, getDocs, limit } from "firebase/firestore";
+import { collection, query, where, getDocs, limit, doc, getDoc} from "firebase/firestore";
 import { db } from '../firebase/firebase'
 import { useEffect, useState } from 'react'
 import { unstable_deprecatedPropType } from '@mui/utils';
@@ -12,18 +12,6 @@ export default function MainPage(props) {
   const [cards, setCards] = useState([]);
   const [num, setNum] = useState(50);
   const [selectValue, setSelectedValue] = useState("0");
-
-  useEffect(() => {
-    const q = query(collection(db, "events"), limit(num));
-    getDocs(q).then((snapshots) => {
-      let newArr = []
-      snapshots.forEach((doc) => {
-        const docData = doc.data();
-        newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user} />);
-      });
-      setCards(newArr);
-    });
-  }, []);
 
   function loadmore(e) {
     e.preventDefault();
@@ -61,24 +49,24 @@ export default function MainPage(props) {
     });
   };
 
+
   const sortCards = (e) => {
     const selected = e.target.value;
     const recList = [];
 
-    console.log(props.user.uid);
 
     if (selected == "0") {
-
-      const preferenceLst = [];
-      // Get user preferences
-      const userq = query(collection(db, "user"), where("uid", "==", props.user.uid));
-      getDocs(userq).then((snapshots) => {
-        let newArr = []
-        snapshots.forEach((doc) => {
-          const docData = doc.data();
-          console.log(docData);
-        });
-      });
+      let preferenceLst = [];
+      const userRef = doc(db, 'user', props.user.uid)
+      getDoc(userRef).then((snapshot) => {
+        
+        const prefData = snapshot.data()['preferences'];
+        for (const [key, value] of Object.entries(prefData)) {
+          if (value && (!preferenceLst.includes(key))){
+            preferenceLst.push(key);
+          }
+        }
+      })
 
 
       const q = query(collection(db, "events"));
@@ -92,7 +80,8 @@ export default function MainPage(props) {
               tagsArray.push(tag);
             }
           }
-          if (tagsArray.includes(searchTag)) {
+          const filteredArray = tagsArray.filter(value => preferenceLst.includes(value));
+          if (filteredArray.length > 0) {
             newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user} />);
           }
         });
@@ -128,9 +117,9 @@ export default function MainPage(props) {
       <div className='d-flex flex-wrap px-5 py-2'>
         {cards.map((card, i) => { return <div key={i}>{card}</div> })}
       </div>
-      <div className='d-flex justify-content-center my-3'>
-        <button type='submit' className='btn border-0 bg-transparent' onClick={loadmore}>Click to Load More...</button>
-      </div>
+      {/* <div className='d-flex justify-content-center my-3'>
+        <button type='submit' className='cursor btn border-0 bg-transparent' onClick={loadmore}>Click to Load More...</button>
+      </div> */}
 
     </div>
   )
