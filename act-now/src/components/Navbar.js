@@ -4,6 +4,7 @@ import Logo from './Logo';
 import {auth} from '../firebase/firebase'
 import { doc, getDoc} from "firebase/firestore";
 import { db } from '../firebase/firebase';
+import Tooltip from '@mui/material/Tooltip';
 
 export default function NavBar(props) {
     const router = useNavigate()
@@ -33,11 +34,13 @@ export default function NavBar(props) {
     <div className='poppins' style={{position: "fixed", width: "100%", zIndex: 999}}>
         <nav className="navbar navbar-expand-lg navbar-dark bg-black roboto">
             <div className="container-fluid">
+                <Tooltip title="Home Page">
                 <a className="navbar-brand ps-3" href="/">
                     <div style={{width: "50px"}}>
                         <Logo color="white"/>
                     </div>
                 </a>
+                </Tooltip>
                 
               
                 <button className="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,9 +53,11 @@ export default function NavBar(props) {
                             props.user ?
                             <>
                                 <button className='btn btn-outline-light' onClick={() => {auth.signOut()}}>Sign Out</button>
-                                <div className='headshot mx-2' onClick={()=>router("/profile")}>
-                                    <img src={imgURL} style={{objectFit: "contain", maxHeight: "40px"}}></img>
-                                </div>
+                                <Tooltip title = "Profile">
+                                    <div className='headshot mx-2' onClick={()=>router("/profile")}>
+                                        <img src={imgURL} style={{objectFit: "contain", maxHeight: "40px"}}></img>
+                                    </div>
+                                </Tooltip>
                             </>
                             
                             :

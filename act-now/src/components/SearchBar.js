@@ -19,6 +19,9 @@ export default function SearchBar(props) {
         // options={topics.map((option) => option.title)}
         options={topics}
         onChange={onSearchChange}
+        style={{
+          paddingInline: "30px"
+        }}
         renderInput={(params) => (
           <TextField
             {...params}
