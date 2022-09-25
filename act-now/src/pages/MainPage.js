@@ -49,6 +49,73 @@ export default function MainPage(props) {
     });
   };
 
+  useEffect(()=>{
+    const recList = [];
+
+
+    if (selectValue == "0") {
+      let preferenceLst = [];
+      const userRef = doc(db, 'user', props.user.uid)
+      getDoc(userRef).then((snapshot) => {
+        
+        const prefData = snapshot.data()['preferences'];
+        for (const [key, value] of Object.entries(prefData)) {
+          if (value && (!preferenceLst.includes(key))){
+            preferenceLst.push(key);
+          }
+        }
+      })
+
+
+      const q = query(collection(db, "events"));
+      getDocs(q).then((snapshots) => {
+        let newArr = []
+        snapshots.forEach((doc) => {
+          const tagsArray = [];
+          const docData = doc.data();
+          for (let tag in docData['tags']) {
+            if (docData['tags'][tag] == true) {
+              tagsArray.push(tag);
+            }
+          }
+          const filteredArray = tagsArray.filter(value => preferenceLst.includes(value));
+          if (filteredArray.length > 0) {
+            newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user} />);
+          }
+        });
+        setCards(newArr);
+      });
+
+
+      for (let tag in props.user) {
+        recList.push(tag);
+        console.log(recList);
+      }
+
+    }
+    if (selectValue == "1"){
+      const q = query(collection(db, "events"));
+      getDocs(q).then((snapshots) => {
+        let newArr = []
+        snapshots.forEach((doc) => {
+          const docData = doc.data();
+          newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user} />);
+        });
+        setCards(newArr);
+    });
+  }
+    if (selectValue == "2"){
+      const q = query(collection(db, "events"), orderBy('createTime', 'desc'), limit(50));
+      getDocs(q).then((snapshots) => {
+        let newArr = []
+        snapshots.forEach((doc) => {
+          const docData = doc.data();
+          newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user} />);
+        });
+        setCards(newArr);
+    });
+    }
+  },[])
 
   const sortCards = (e) => {
     const selected = e.target.value;
