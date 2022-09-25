@@ -24,6 +24,7 @@ export default function InitiatePage(props) {
       description: description,
       creator: props.user.uid,
       num: 1,
+      createTime: Date.now(),
       tags: {'Gender Equality': preferences[0],
              'Environment': preferences[1],
              'LGBTQ+': preferences[2],
