@@ -1,13 +1,36 @@
 import React, { useEffect } from 'react'
 import '../stylings/styleCC.css';
 import {useState} from 'react';
+import { doc, setDoc } from "firebase/firestore";
+import {db} from '../firebase/firebase'
 
-export default function PreferencePage() {
+export default function PreferencePage(props) {
 
     const [preferences, setPreferences] = useState([false, false, false, false,false, false,false, false,
         false, false,false, false]);
 
     //useEffect(() => {(preferences)}, [preferences]);
+
+    async function handleSubmit(e){
+        e.preventDefault();
+        if(props.user){
+            const userRef = doc(db, "user", props.user.uid);
+            await setDoc(userRef, {
+                preferences: {'Gender Equality': preferences[0], 
+                              'Environment': preferences[1],
+                              'LGBTQ+': preferences[2],
+                              'Racial Justice': preferences[3],
+                              'Health': preferences[4],
+                              'Social Policy': preferences[5],
+                              'Civil Rights': preferences[6],
+                              'Education': preferences[7],
+                              'Poverty': preferences[8],
+                              'Animals': preferences[9],
+                              'Anti-War': preferences[10],
+                              'Energy': preferences[11],}
+            }, {merge : true});
+        }
+    }
 
     function handleChange(index){
         let newArr = [...preferences];
@@ -18,11 +41,11 @@ export default function PreferencePage() {
     return (
         <div className='white-background d-flex flex-column align-items-center justify-content-center poppins'>
             <h2 className='prefTitle mt-5'>What do you care about?</h2>
-            <div className='subtitle'>Please select your interests (up to 5)</div>
-            <form className='d-flex flex-column align-items-center'>
+            <div className='subtitle'>Please select your interests</div>
+            <form className='d-flex flex-column align-items-center' onSubmit={handleSubmit}>
 
                 <div className='button-container'>
-                    <button type="button" className="button button1" onClick={() => {handleChange(0)}} style={{ backgroundColor: preferences[0] ? '#a7abaf':'#e9ecef'}}> Gender Equality</button>
+                    <button type="button" className="button button1" onClick={() => {handleChange(0)}} style={{ backgroundColor: preferences[0]? '#a7abaf':'#e9ecef'}}>Gender Equality</button>
                     <button type="button" className="button button2" onClick={() => {handleChange(1)}} style={{ backgroundColor: preferences[1]? '#72d87f':'#b2f2bb'}}>Environment</button>
                     <button type="button" className="button button3" onClick={() => {handleChange(2)}} style={{ backgroundColor: preferences[2]? '#d9a565':'#ffd8a8'}}>LGBTQ+</button>
                     <button type="button" className="button button4" onClick={() => {handleChange(3)}} style={{ backgroundColor: preferences[3]? '#f69595':'#ffc9c9'}}>Racial Justice</button>
