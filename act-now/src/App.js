@@ -114,9 +114,6 @@ function App() {
           :
           "Loading"
       }
-
-
-
     </div >
   );
 }

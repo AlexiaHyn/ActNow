@@ -8,9 +8,6 @@ export default function EventPage(props) {
 
     return (
         <div>
-
-
-            {/* <button type='button' className={'btn btn-outline-secondary'}>Back</button> */}
             <div class=" h-100 d-flex justify-content-center align-items-center" >
 
                 <div className='card rounded event'>
@@ -22,7 +19,6 @@ export default function EventPage(props) {
                     <div>What this event is about: {props.description}</div>
                     <div>Tags: {props.tags}</div>
                     <div className='d-flex align-items-center justify-content-end'>
-                        {/* <button onClick={History.back()}>Back</button> */}
                         <button type='button' className={'btn btn-outline-secondary'} onClick={() => navigate('/')}>Back to all events</button>
                         <button type='button' className={'btn btn-outline-secondary'}>Chat with host</button>
                         <button type='button' className={'btn btn-outline-secondary'}>Register now</button>
