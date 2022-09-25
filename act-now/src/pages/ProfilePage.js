@@ -15,6 +15,10 @@ export default function ProfilePage(props) {
 
     const [preferences, setPreferences] = useState([false, false, false, false,false, false,false, false,
       false, false,false, false]);
+
+    const [create, setCreate] = useState([]);
+    const [joined, setJoined] = useState([]);
+    const [starred, setStarred] = useState([]);
     
     useEffect(() => {
       if (props.user){

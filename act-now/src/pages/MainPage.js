@@ -49,7 +49,7 @@ export default function MainPage(props) {
       </div>
 
       <select className="form-select m-2" style={{width: "20vw", minWidth: "180px", position: "relative"}}>
-        <option selected>Recommended</option>
+        <option value="0">Recommended</option>
         <option value="1">Hot</option>
         <option value="2">Latest</option>
       </select>
