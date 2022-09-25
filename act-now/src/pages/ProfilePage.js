@@ -53,8 +53,10 @@ export default function ProfilePage(props) {
           const eventID = docsnap.data()['eventID'];
           const eventDoc = doc(db, "events", eventID);
           getDoc(eventDoc).then((docSnap) => {
-            const docData = docSnap.data();
-            newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
+            if(docSnap.exists()){
+              const docData = docSnap.data();
+              newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
+            }
           });
         })
         setCreate(newArr)
@@ -66,8 +68,10 @@ export default function ProfilePage(props) {
           const eventID = docsnap.data()['eventID'];
           const eventDoc = doc(db, "events", eventID);
           getDoc(eventDoc).then((docSnap) => {
-            const docData = docSnap.data();
-            newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
+            if(docSnap.exists()){
+              const docData = docSnap.data();
+              newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
+            }
           });
         })
         setJoined(newArr)
@@ -79,8 +83,10 @@ export default function ProfilePage(props) {
           const eventID = docsnap.data()['eventID'];
           const eventDoc = doc(db, "events", eventID);
           getDoc(eventDoc).then((docSnap) => {
-            const docData = docSnap.data();
-            newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
+            if(docSnap.exists()){
+              const docData = docSnap.data();
+              newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
+            }
           });
         })
         setStarred(newArr)
