@@ -4,7 +4,7 @@ import EventCard from '../components/EventCard';
 import InitiateEvent from '../components/InitiateEvent';
 import { collection, query, where, getDocs } from "firebase/firestore";
 import {db} from '../firebase/firebase'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function MainPage() {
 
@@ -16,7 +16,7 @@ export default function MainPage() {
       let newArr = []
       snapshots.forEach((doc) => {
         const docData = doc.data();
-        newArr.push(<EventCard title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tag={docData['tags']} id={docData['id']} creator={docData['creator']}/>);
+        newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']}/>);
       });
       setCards(newArr);
     });
@@ -28,8 +28,8 @@ export default function MainPage() {
         <SearchBar />
       </div>
 
-      <div className='d-flex flex-wrap'>
-        {recList.map((item, i) => (<EventCard title={item.title} intro={item.intro} tags={item.tags} />))}
+      <div className='d-flex flex-wrap px-5 py-2'>
+        {cards.map((card, i) => {return <div key={i}>{card}</div>})}
       </div>
       <div className='d-flex justify-content-center my-3'>
         <button type='submit' className='btn border-0 bg-transparent'>Click to Load More...</button>

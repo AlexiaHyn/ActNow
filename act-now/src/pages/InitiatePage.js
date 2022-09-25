@@ -1,8 +1,10 @@
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {db} from '../firebase/firebase'
 
 export default function InitiatePage(props) {
+  const navigate = useNavigate();
   const [preferences, setPreferences] = useState([false, false, false, false,false, false,false, false,
     false, false,false, false]);
 
@@ -39,7 +41,8 @@ export default function InitiatePage(props) {
              'Energy': preferences[11],}
     });
     await setDoc(doc(db, 'events', docRef.id), {id:docRef.id}, {merge: true})
-    alert('event added')
+    alert('event added');
+    navigate("/");
   }
 
   function handleChange(index){
