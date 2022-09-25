@@ -42,22 +42,25 @@ export default function SignupPage() {
     return (
         <div className='white-background d-flex justify-content-center align-items-center poppins'>
             <div className='card border-0 p-3'>
-                <h2>Sign Up</h2>
+                <h1 className='fw-bold mb-3'>Sign Up</h1>
                 <form onSubmit={onFormSubmit}>
                     <div className="mb-3">
-                        <div>Email:</div>
+                        <div className='fw-bold'>Email:</div>
                         <input type="email" className="form-control" placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} required/>
-                        <div>*We prefer Rice GMail account.</div>
+                        <div className='text-secondary'>*We prefer Rice GMail account.</div>
                     </div>
                     <div className="mb-3">
-                        <div>Password:</div>
+                        <div className='fw-bold'>Password:</div>
                         <input type="password" className="form-control" value={password} onChange={e => setPassword(e.target.value)} placeholder='Password' required/>
                     </div>
                     <div className="mb-3">
-                        <div>Confirm Password:</div>
+                        <div className='fw-bold'>Confirm Password:</div>
                         <input type="password" className="form-control" value={passwordAgain} onChange={e => setPasswordAgain(e.target.value)} placeholder='Password' required/>
                     </div>
-                    <button type="submit" className='btn btn-dark'>Submit</button>
+                    <div className='d-flex justify-content-end'>
+                        <button type="submit" className='btn btn-dark'>Submit</button>
+                    </div>
+                    
                 </form>
             </div>
         </div>

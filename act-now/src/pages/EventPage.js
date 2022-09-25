@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { doc, getDoc, setDoc, deleteDoc} from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { createBrowserHistory } from "history";
+import { logoDict } from "../components/EventLogo";
 
 export default function EventPage(props) {
   const [collected, setCollected] = useState(false);
@@ -136,7 +137,15 @@ export default function EventPage(props) {
           <div className="d-flex mb-5 align-items-center">
             <div className="fw-bold me-2">Tags:</div>
             <div className='d-flex flex-wrap'>
-              {tags.map((tag, idx)=> {return <div key={idx} className="m-1 text-info"> {"#" + tag} </div>})}
+              {tags.map((tag, idx)=> {return <div key={idx} className="m-2 text-info"> 
+            <div className='d-flex'>
+              <div style={{width: "20px", height: "20px", overflow: "hidden"}}>
+                <img src={logoDict[tag]} style={{objectFit: "contain", maxHeight: "100%"}}></img>
+              </div>
+              {"#" + tag}
+            </div>
+             
+        </div>})}
             </div>
           </div>
           
