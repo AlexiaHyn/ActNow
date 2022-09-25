@@ -13,6 +13,7 @@ import MainPage from './pages/MainPage';
 import PreferencePage from './pages/PreferencePage';
 import EventPage from './pages/EventPage';
 import SetProfilePage from './pages/SetProfilePage';
+import ProfilePage from './pages/ProfilePage';
 
 import RequireAuth from './components/RequireAuth';
 import { db, auth } from './firebase/firebase';
@@ -33,12 +34,12 @@ function App() {
         const history = createBrowserHistory()
         if (!user.emailVerified && history.location.pathname.includes('/signup')) {
           auth.signOut();
-          return
+          
         }
         if (!user.emailVerified && !history.location.pathname.includes('/signup')) {
           alert("attempt to login email without verification");
           auth.signOut();
-          return;
+          
         }
         const docRef = doc(db, "user", user.uid);
         getDoc(docRef).then((docSnap) => {
@@ -74,6 +75,7 @@ function App() {
         <Route element={<SignupPage />} path='/signup'></Route>
         <Route element={<SetProfilePage user={user}/>} path='/setprofile'></Route>
         <Route element={<EventPage />} path='/event'></Route>
+        <Route element={<ProfilePage />} path='/profile'></Route>
         <Route element={<SetProfilePage user={user}/>} path='/setprofile'></Route>
 
       </Routes>

@@ -16,7 +16,7 @@ export default function SearchBar() {
         renderInput={(params) => (
           <TextField
             {...params}
-            label="Search input"
+            label="Search for events/topics"
             InputProps={{
               ...params.InputProps,
               type: 'search',

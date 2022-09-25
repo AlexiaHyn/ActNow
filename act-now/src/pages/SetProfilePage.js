@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import {db, storage} from '../firebase/firebase'
 import {ref, uploadBytesResumable, getDownloadURL} from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
+import { useNavigate } from 'react-router-dom';
 
 export default function SetProfilePage(props) {
     const [name, setName] = useState("");
-
+    const navigate = useNavigate();
     const [file, setFile] = useState(null);
     const [imgURL, setURL] = useState("");
     const [progress, setProgress] = useState(-1)
@@ -51,13 +52,16 @@ export default function SetProfilePage(props) {
       } else {
         //add random picture
       }
+
+      navigate("/preference")
+
     }
 
   return (
     <div className='white-background d-flex flex-column align-items-center justify-content-center poppins'>
         <h2 className='prefTitle mt-5 mb-4'>Create your profile</h2>
         <form className='d-flex flex-column align-items-center' onSubmit={handleSubmit}>
-            <div className='profile-pic'><img src={imgURL}></img></div>
+            <div className='profile-pic'><img style={{objectFit: "contain", maxHeight: "20vw"}} src={imgURL}/></div>
             <input id="avatarFor" style={{display:'none'}} type="file" accept="image/gif,image/jpeg,image/jpg,image/png" onChange={(e)=>handleImageChange(e)}/>
             <label className='btn btn-secondary my-3 px-4' style={{borderRadius: "17px"}} htmlFor="avatarFor"> Change Profile Picture </label>
             <input className='input my-2 text-center fs-4 mb-5' placeholder='UserName' value={name} onChange={(e) => setName(e.target.value)} required></input>
