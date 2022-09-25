@@ -40,7 +40,7 @@ export default function SignupPage() {
     
 
     return (
-        <div className='white-background d-flex justify-content-center align-items-center'>
+        <div className='white-background d-flex justify-content-center align-items-center poppins'>
             <div className='card border-0 p-3'>
                 <h2>Sign Up</h2>
                 <form onSubmit={onFormSubmit}>

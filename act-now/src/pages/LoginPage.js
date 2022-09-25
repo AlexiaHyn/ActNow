@@ -30,7 +30,7 @@ export default function LoginPage() {
     }
 
   return (
-    <div className='white-background d-flex justify-content-center align-items-center'>
+    <div className='white-background d-flex justify-content-center align-items-center poppins'>
         <div className='card border-0 p-3'>
             <h2>Login</h2>
             <form onSubmit={onFormSubmit}>

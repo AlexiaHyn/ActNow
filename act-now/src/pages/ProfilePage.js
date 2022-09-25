@@ -203,7 +203,11 @@ export default function ProfilePage(props) {
         <div className="tab-content" id="pills-tabContent">
             <div className='line-segment'></div>
             <div style={{width: "100%"}} className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-joined-tab" tabIndex="0">...</div>
-            <div style={{width: "100%"}} className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-collected-tab" tabIndex="0">...</div>
+            <div style={{width: "100%"}} className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-collected-tab" tabIndex="0">
+              <div className='d-flex flex-wrap px-5 py-2'>
+                {starred.map((card, i) => {return <div key={i}>{card}</div>})}
+              </div>
+            </div>
             <div style={{width: "100%"}} className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-past-tab" tabIndex="0">...</div>
             <div style={{width: "100%"}} className="tab-pane fade" id="pills-disabled" role="tabpanel" aria-labelledby="pills-setting-tab" tabIndex="0">
               <div className='d-flex justify-content-center'>
