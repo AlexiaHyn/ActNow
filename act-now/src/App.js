@@ -45,7 +45,7 @@ function App() {
           if (!docSnap.exists()) {
             //delete once the preference page is done
             setDoc(doc(db, "user", user.uid), {
-              name: "",
+              id: user.uid,
               //To be added
             }).then(
               //send to preference page
