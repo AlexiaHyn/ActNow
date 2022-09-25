@@ -44,12 +44,11 @@ function App() {
         const docRef = doc(db, "user", user.uid);
         getDoc(docRef).then((docSnap) => {
           if (!docSnap.exists()) {
-            //delete once the preference page is done
             setDoc(doc(db, "user", user.uid), {
               id: user.uid,
-              //To be added
-            }).then(
-              navigate("/setprofile")
+            }).then(() => {
+              navigate("/setprofile");
+            }
             );
           }
         })
