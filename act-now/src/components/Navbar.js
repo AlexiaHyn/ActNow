@@ -2,11 +2,15 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate, useLocation} from "react-router-dom";
 import Logo from './Logo';
 import {auth} from '../firebase/firebase'
+import { doc, getDoc} from "firebase/firestore";
+import { db } from '../firebase/firebase';
 
 export default function NavBar(props) {
     const router = useNavigate()
     const location = useLocation()
     const [homePage, setHomePage] = useState(true)
+    const [imgURL, setURL] = useState("");
+
     useEffect(()=>{
         if (location.pathname.includes("story")){
             setHomePage(false)
@@ -15,6 +19,16 @@ export default function NavBar(props) {
         }
     }, [location])
 
+    useEffect(() => {
+        if(props.user){
+            const userRef = doc(db, "user", props.user.uid);
+            getDoc(userRef).then((docSnap)=>{
+            if(docSnap.exists()){
+              setURL(docSnap.data()['profileImage']);
+            }
+          });
+        }
+    }, [props.user]);
   return (
     <div className='poppins' style={{position: "fixed", width: "100%"}}>
         <nav className="navbar navbar-expand-lg navbar-dark bg-black roboto">
@@ -34,7 +48,13 @@ export default function NavBar(props) {
                         <div className='d-flex align-items-center'> 
                         {
                             props.user ?
-                            <button className='btn btn-outline-light' onClick={() => {auth.signOut()}}>Sign Out</button>
+                            <>
+                                <button className='btn btn-outline-light' onClick={() => {auth.signOut()}}>Sign Out</button>
+                                <div className='headshot mx-2' onClick={()=>router("/profile")}>
+                                    <img src={imgURL} style={{objectFit: "contain", maxHeight: "10vw"}}></img>
+                                </div>
+                            </>
+                            
                             :
                             <>
                                 <button className='btn btn-light mx-1' onClick={()=>router("/signup")}>Sign Up</button>
