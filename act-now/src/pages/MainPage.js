@@ -2,7 +2,7 @@ import React from 'react';
 import SearchBar from '../components/SearchBar';
 import EventCard from '../components/EventCard';
 import InitiateEvent from '../components/InitiateEvent';
-import { collection, query, where, getDocs, limit, doc, getDoc} from "firebase/firestore";
+import { collection, query, where, getDocs, limit, doc, getDoc, orderBy} from "firebase/firestore";
 import { db } from '../firebase/firebase'
 import { useEffect, useState } from 'react'
 import { unstable_deprecatedPropType } from '@mui/utils';
@@ -95,8 +95,30 @@ export default function MainPage(props) {
       }
 
     }
-    setSelectedValue(e.target.value);
+    if (selected == "1"){
+      const q = query(collection(db, "events"));
+      getDocs(q).then((snapshots) => {
+        let newArr = []
+        snapshots.forEach((doc) => {
+          const docData = doc.data();
+          newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user} />);
+        });
+        setCards(newArr);
+    });
   }
+    if (selected == "2"){
+      const q = query(collection(db, "events"), orderBy('createTime', 'desc'), limit(50));
+      getDocs(q).then((snapshots) => {
+        let newArr = []
+        snapshots.forEach((doc) => {
+          const docData = doc.data();
+          newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user} />);
+        });
+        setCards(newArr);
+    });
+    }
+  setSelectedValue(e.target.value);
+}
 
   return (
     <div className='pt-5 poppins'>
