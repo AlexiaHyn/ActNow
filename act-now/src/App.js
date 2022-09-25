@@ -34,12 +34,12 @@ function App() {
         const history = createBrowserHistory()
         if (!user.emailVerified && history.location.pathname.includes('/signup')) {
           auth.signOut();
-          
+
         }
         if (!user.emailVerified && !history.location.pathname.includes('/signup')) {
           alert("attempt to login email without verification");
           auth.signOut();
-          
+
         }
         const docRef = doc(db, "user", user.uid);
         getDoc(docRef).then((docSnap) => {
@@ -74,10 +74,10 @@ function App() {
         <Route element={<HomePage />} path='/home'></Route>
         <Route element={<LoginPage />} path='/login'></Route>
         <Route element={<SignupPage />} path='/signup'></Route>
-        <Route element={<SetProfilePage user={user}/>} path='/setprofile'></Route>
-        <Route element={<EventPage />} path='/event'></Route>
-        <Route element={<ProfilePage user={user}/>} path='/profile'></Route>
-        <Route element={<SetProfilePage user={user}/>} path='/setprofile'></Route>
+        <Route element={<SetProfilePage user={user} />} path='/setprofile'></Route>
+        <Route element={<EventPage id={ } />} path='/event'></Route>
+        <Route element={<ProfilePage user={user} />} path='/profile'></Route>
+        <Route element={<SetProfilePage user={user} />} path='/setprofile'></Route>
 
       </Routes>
 
