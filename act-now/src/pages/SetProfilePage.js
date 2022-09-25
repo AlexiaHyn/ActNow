@@ -14,7 +14,6 @@ export default function SetProfilePage(props) {
 
     useEffect(()=>{
       if(props.user){
-        const userRef = doc(db, "user", props.user.uid);
         const rand = Math.random();
         if (rand < 0.33){
           setURL('https://firebasestorage.googleapis.com/v0/b/actnow-18afb.appspot.com/o/defaultImage%2Fprofile1.png?alt=media&token=bac0e191-b6c3-43a0-857e-6b23a4cca4fe');
