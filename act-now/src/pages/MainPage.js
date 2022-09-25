@@ -2,25 +2,41 @@ import React from 'react';
 import SearchBar from '../components/SearchBar';
 import EventCard from '../components/EventCard';
 import InitiateEvent from '../components/InitiateEvent';
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, limit} from "firebase/firestore";
 import {db} from '../firebase/firebase'
 import { useEffect, useState } from 'react'
 
-export default function MainPage() {
+export default function MainPage(props) {
 
   const [cards, setCards] = useState([]);
+  const [num, setNum] = useState(50);
 
   useEffect(() => {
-    const q = query(collection(db, "events"));
+    const q = query(collection(db, "events"), limit(num));
     getDocs(q).then((snapshots) => {
       let newArr = []
       snapshots.forEach((doc) => {
         const docData = doc.data();
-        newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']}/>);
+        newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
       });
       setCards(newArr);
     });
   }, []);
+
+  function loadmore(e){
+    e.preventDefault();
+    const newNum = num + 50;
+    setNum(newNum);
+    const q = query(collection(db, "events"), limit(num));
+    getDocs(q).then((snapshots) => {
+      let newArr = []
+      snapshots.forEach((doc) => {
+        const docData = doc.data();
+        newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
+      });
+      setCards(newArr);
+    });
+  }
 
   return (
     <div className='pt-5 Poppins'>
@@ -32,7 +48,7 @@ export default function MainPage() {
         {cards.map((card, i) => {return <div key={i}>{card}</div>})}
       </div>
       <div className='d-flex justify-content-center my-3'>
-        <button type='submit' className='btn border-0 bg-transparent'>Click to Load More...</button>
+        <button type='submit' className='btn border-0 bg-transparent' onClick={loadmore}>Click to Load More...</button>
       </div>
       
       <div className='initiate-wrapper'>
