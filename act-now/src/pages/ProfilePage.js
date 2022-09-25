@@ -59,7 +59,7 @@ export default function ProfilePage(props) {
             }
           });
         })
-        setCreate(newArr)
+        setCreate([...create], newArr)
       })
       const q2 = query(collection(db, "user", props.user.uid, "joined"));
       getDocs(q2).then((snapshots) => {
@@ -74,7 +74,7 @@ export default function ProfilePage(props) {
             }
           });
         })
-        setJoined(newArr)
+        setJoined([...joined], newArr)
       })
       const q3 = query(collection(db, "user", props.user.uid, "starred"));
       getDocs(q3).then((snapshots) => {
@@ -89,7 +89,7 @@ export default function ProfilePage(props) {
             }
           });
         })
-        setStarred(newArr)
+        setStarred([...starred], newArr)
       })
     }, [props.user]);
     function handleImageChange(e){
@@ -112,7 +112,7 @@ export default function ProfilePage(props) {
       await setDoc(userRef, {name: name}, {merge: true});
 
       if(file){
-        const storageRef = ref(storage, '/profileImage/' + props.user.uid + '_' +file.name);
+        const storageRef = ref(storage, '/profileImage/' + props.user.uid + '_' + file.name);
         const uploadTask = uploadBytesResumable(storageRef, file);
         uploadTask.on(
           "state_changed",
@@ -208,7 +208,14 @@ export default function ProfilePage(props) {
         
         <div className="tab-content" id="pills-tabContent">
             <div className='line-segment'></div>
-            <div style={{width: "100%"}} className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-joined-tab" tabIndex="0">...</div>
+            <div style={{width: "100%"}} className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-joined-tab" tabIndex="0">
+              <div className='d-flex flex-wrap px-5 py-2'>
+                {create.map((card, i) => {return <div key={i}>{card}</div>})}
+              </div>
+              <div className='d-flex flex-wrap px-5 py-2'>
+                {joined.map((card, i) => {return <div key={i}>{card}</div>})}
+              </div>
+            </div>
             <div style={{width: "100%"}} className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-collected-tab" tabIndex="0">
               <div className='d-flex flex-wrap px-5 py-2'>
                 {starred.map((card, i) => {return <div key={i}>{card}</div>})}

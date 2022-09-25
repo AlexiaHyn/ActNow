@@ -79,9 +79,9 @@ export default function MainPage(props) {
       <div className='d-flex flex-wrap px-5 py-2'>
         {cards.map((card, i) => { return <div key={i}>{card}</div> })}
       </div>
-      <div className='d-flex justify-content-center my-3'>
-        <button type='submit' className='btn border-0 bg-transparent' onClick={loadmore}>Click to Load More...</button>
-      </div>
+      {/* <div className='d-flex justify-content-center my-3'>
+        <button type='submit' className='cursor btn border-0 bg-transparent' onClick={loadmore}>Click to Load More...</button>
+      </div> */}
 
     </div>
   )
