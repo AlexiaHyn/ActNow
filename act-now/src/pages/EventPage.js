@@ -15,6 +15,8 @@ export default function EventPage(props) {
   const [time, setTime] = useState("");
   const [loc, setLoc] = useState("");
   const [tags, setTags] = useState([]);
+  const [creatorName, setCreatorName] = useState("");
+  const [creatorPic, setCreatorPic] = useState("");
 
   let navigate = useNavigate();
   
@@ -32,7 +34,13 @@ export default function EventPage(props) {
         setDate(data['date']);
         setTime(data['time']);
         setLoc(data['loc']);
-        handleTags(data['tags'])
+        const creatorRef = doc(db, "user", data['creator']);
+        getDoc(creatorRef).then((creatorSnapshot)=>{
+          const creatorData = creatorSnapshot.data();
+          setCreatorName(creatorData['name']);
+          setCreatorPic(creatorData['profileImage']);
+        })
+        handleTags(data['tags']);
     });
     const joinedRef = doc(db, 'user', props.user.uid, 'joined', eventId);
     getDoc(joinedRef).then((docSnap) => {
@@ -84,13 +92,27 @@ export default function EventPage(props) {
     <div className="poppins pt-5">
       <div className="white-background d-flex justify-content-center pt-5">
         <div className="event">
-          <div className="d-flex justify-content-between align-items-center">
-            <h2>Event Name: {name}</h2>
+          <div className="d-flex justify-content-between align-items-center mb-5">
+            <div className="d-flex align-items-center">
+              <div className="d-flex flex-column align-items-center">
+                <div className="d-flex mb-2 px-2" style={{width: "fit-content", borderRadius: "15px", backgroundColor: "#ddd"}}>
+                  <div className="fw-bold me-2">Initiator:</div>
+                  {creatorName}
+                </div>
+                <div className='profile-pic-md me-2'>
+                    <img src={creatorPic} style={{objectFit: "contain", maxHeight: "100%"}}></img>
+                </div>
+              </div>
+                
+              <h1 className="fw-bold mx-2">:</h1>
+              <h1 className="fw-bold">{name}</h1>
+            </div>
+            
             <div className="d-flex align-items-center">
               <button
                 type="button"
                 className={
-                  "btn ms-1 " + `${going ? "btn-outline-dark" : "btn-dark"}`
+                  "btn mx-1 " + `${going ? "btn-outline-dark" : "btn-dark"}`
                 }
                 onClick={() => handleJoin()}
               >
@@ -105,10 +127,19 @@ export default function EventPage(props) {
             </div>
           </div>
 
-          <div>Brief Overview: {intro}</div>
-          <div>Event Details:</div>
-          <div>{des}</div>
-          <div>Tags: {tags}</div>
+          <div className="mb-3">
+            <div className="fw-bold me-2">Brief Overview:</div>
+            {intro}
+          </div>
+          <div className="fw-bold">Event Details:</div>
+          <div className="mb-3">{des}</div>
+          <div className="d-flex mb-5 align-items-center">
+            <div className="fw-bold me-2">Tags:</div>
+            <div className='d-flex flex-wrap'>
+              {tags.map((tag, idx)=> {return <div key={idx} className="m-1 text-info"> {"#" + tag} </div>})}
+            </div>
+          </div>
+          
           <div className="d-flex align-items-center justify-content-end">
             <button
               type="button"
@@ -118,7 +149,11 @@ export default function EventPage(props) {
               {"<< Back to all events"}
             </button>
             <button type="button" className={"btn btn-secondary"}>
-              Chat with host
+              <div className="d-flex">
+                <i className="bi bi-chat me-1"></i>
+                <div>Chat with Initiator</div>
+              </div>
+              
             </button>
           </div>
         </div>
