@@ -45,7 +45,7 @@ function App() {
           if (!docSnap.exists()) {
             //delete once the preference page is done
             setDoc(doc(db, "user", user.uid), {
-              name: "",
+              id: user.uid,
               //To be added
             }).then(
               //send to preference page
@@ -85,7 +85,7 @@ function App() {
               <RequireAuth user={user}>
                 <EventPage />
               </RequireAuth>
-            } path='/event'></Route>
+            } path='/events/:id'></Route>
             <Route element={
               <RequireAuth user={user}>
                 <ProfilePage user={user} />
@@ -105,10 +105,6 @@ function App() {
             <Route element={<HomePage />} path='/home'></Route>
             <Route element={<LoginPage />} path='/login'></Route>
             <Route element={<SignupPage />} path='/signup'></Route>
-            <Route element={<SetProfilePage user={user} />} path='/setprofile'></Route>
-            <Route element={<EventPage />} path='/events/:id'></Route>
-            <Route element={<ProfilePage user={user} />} path='/profile'></Route>
-            <Route element={<SetProfilePage user={user} />} path='/setprofile'></Route>
 
           </Routes>
           :

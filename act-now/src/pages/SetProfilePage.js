@@ -14,7 +14,6 @@ export default function SetProfilePage(props) {
 
     useEffect(()=>{
       if(props.user){
-        const userRef = doc(db, "user", props.user.uid);
         const rand = Math.random();
         if (rand < 0.33){
           setURL('https://firebasestorage.googleapis.com/v0/b/actnow-18afb.appspot.com/o/defaultImage%2Fprofile1.png?alt=media&token=bac0e191-b6c3-43a0-857e-6b23a4cca4fe');
@@ -78,7 +77,7 @@ export default function SetProfilePage(props) {
     <div className='white-background d-flex flex-column align-items-center justify-content-center poppins'>
         <h2 className='prefTitle mt-5 mb-4'>Create your profile</h2>
         <form className='d-flex flex-column align-items-center' onSubmit={handleSubmit}>
-            <div className='profile-pic'><img style={{objectFit: "contain", maxHeight: "20vw"}} src={imgURL}/></div>
+            <div className='profile-pic'><img style={{objectFit: "contain", maxHeight: "100%"}} src={imgURL}/></div>
             <input id="avatarFor" style={{display:'none'}} type="file" accept="image/gif,image/jpeg,image/jpg,image/png" onChange={(e)=>handleImageChange(e)}/>
             <label className='btn btn-secondary my-3 px-4' style={{borderRadius: "17px"}} htmlFor="avatarFor"> Change Profile Picture </label>
             <input className='input my-2 text-center fs-4 mb-5' placeholder='UserName' value={name} onChange={(e) => setName(e.target.value)} required></input>

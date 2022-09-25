@@ -8,9 +8,11 @@ export default function EventPage(props) {
 
     return (
         <div>
-            <div class=" h-100 d-flex justify-content-center align-items-center" >
 
-                <div className='card rounded event'>
+            {/* <button type='button' className={'btn btn-outline-secondary'}>Back</button> */}
+            <div className="white-background d-flex justify-content-center" >
+                <div className='event'>
+
                     <div className='d-flex justify-content-between'>
                         <h3>Event Name: {props.name}</h3>
                         <i className={"cursor bi bi-star" + `${collected ? "-fill" : ""}`} onClick={() => setCollected(!collected)}></i>
