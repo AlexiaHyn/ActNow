@@ -214,8 +214,6 @@ export default function ProfilePage(props) {
             <div style={{width: "100%"}} className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-joined-tab" tabIndex="0">
               <div className='d-flex flex-wrap px-5 py-2'>
                 {create.map((card, i) => {return <div key={i}>{card}</div>})}
-              </div>
-              <div className='d-flex flex-wrap px-5 py-2'>
                 {joined.map((card, i) => {return <div key={i}>{card}</div>})}
               </div>
             </div>

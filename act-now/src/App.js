@@ -49,7 +49,7 @@ function App() {
               id: user.uid,
               //To be added
             }).then(
-              navigate("/setprofile")
+              window.location="/setprofile"
             );
           }
         })
