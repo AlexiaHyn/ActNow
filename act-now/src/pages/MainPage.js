@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchBar from '../components/SearchBar';
 import EventCard from '../components/EventCard';
+import InitiateEvent from '../components/InitiateEvent';
 
 export default function MainPage() {
   return (
@@ -17,7 +18,10 @@ export default function MainPage() {
         <EventCard/>
         <EventCard/>
       </div>
-    
+      <div className='initiate-wrapper'>
+        <InitiateEvent/>
+      </div>
+      
     </div>
   )
 }

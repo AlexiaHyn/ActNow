@@ -51,7 +51,7 @@ export default function NavBar(props) {
                             <>
                                 <button className='btn btn-outline-light' onClick={() => {auth.signOut()}}>Sign Out</button>
                                 <div className='headshot mx-2' onClick={()=>router("/profile")}>
-                                    <img src={imgURL} style={{objectFit: "contain", maxHeight: "10vw"}}></img>
+                                    <img src={imgURL} style={{objectFit: "contain", maxHeight: "40px"}}></img>
                                 </div>
                             </>
                             
