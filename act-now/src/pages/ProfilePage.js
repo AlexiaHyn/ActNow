@@ -53,11 +53,13 @@ export default function ProfilePage(props) {
           const eventID = docsnap.data()['eventID'];
           const eventDoc = doc(db, "events", eventID);
           getDoc(eventDoc).then((docSnap) => {
-            const docData = docSnap.data();
-            newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
+            if(docSnap.exists()){
+              const docData = docSnap.data();
+              newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
+            }
           });
         })
-        setCreate(newArr)
+        setCreate([...create], newArr)
       })
       const q2 = query(collection(db, "user", props.user.uid, "joined"));
       getDocs(q2).then((snapshots) => {
@@ -66,11 +68,13 @@ export default function ProfilePage(props) {
           const eventID = docsnap.data()['eventID'];
           const eventDoc = doc(db, "events", eventID);
           getDoc(eventDoc).then((docSnap) => {
-            const docData = docSnap.data();
-            newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
+            if(docSnap.exists()){
+              const docData = docSnap.data();
+              newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
+            }
           });
         })
-        setJoined(newArr)
+        setJoined([...joined], newArr)
       })
       const q3 = query(collection(db, "user", props.user.uid, "starred"));
       getDocs(q3).then((snapshots) => {
@@ -79,11 +83,13 @@ export default function ProfilePage(props) {
           const eventID = docsnap.data()['eventID'];
           const eventDoc = doc(db, "events", eventID);
           getDoc(eventDoc).then((docSnap) => {
-            const docData = docSnap.data();
-            newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
+            if(docSnap.exists()){
+              const docData = docSnap.data();
+              newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
+            }
           });
         })
-        setStarred(newArr)
+        setStarred([...starred], newArr)
       })
     }, [props.user]);
     function handleImageChange(e){
@@ -106,7 +112,7 @@ export default function ProfilePage(props) {
       await setDoc(userRef, {name: name}, {merge: true});
 
       if(file){
-        const storageRef = ref(storage, '/profileImage/' + props.user.uid + '_' +file.name);
+        const storageRef = ref(storage, '/profileImage/' + props.user.uid + '_' + file.name);
         const uploadTask = uploadBytesResumable(storageRef, file);
         uploadTask.on(
           "state_changed",
@@ -202,7 +208,14 @@ export default function ProfilePage(props) {
         
         <div className="tab-content" id="pills-tabContent">
             <div className='line-segment'></div>
-            <div style={{width: "100%"}} className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-joined-tab" tabIndex="0">...</div>
+            <div style={{width: "100%"}} className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-joined-tab" tabIndex="0">
+              <div className='d-flex flex-wrap px-5 py-2'>
+                {create.map((card, i) => {return <div key={i}>{card}</div>})}
+              </div>
+              <div className='d-flex flex-wrap px-5 py-2'>
+                {joined.map((card, i) => {return <div key={i}>{card}</div>})}
+              </div>
+            </div>
             <div style={{width: "100%"}} className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-collected-tab" tabIndex="0">
               <div className='d-flex flex-wrap px-5 py-2'>
                 {starred.map((card, i) => {return <div key={i}>{card}</div>})}
