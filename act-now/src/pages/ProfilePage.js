@@ -41,7 +41,7 @@ export default function ProfilePage(props) {
       await setDoc(userRef, {name: name}, {merge: true});
 
       if(file){
-        const storageRef = ref(storage, '/profileImage/' + file.name);
+        const storageRef = ref(storage, '/profileImage/' + props.user.uid + '_' +file.name);
         const uploadTask = uploadBytesResumable(storageRef, file);
         uploadTask.on(
           "state_changed",
