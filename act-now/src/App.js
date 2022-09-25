@@ -44,6 +44,7 @@ function App() {
         const docRef = doc(db, "user", user.uid);
         getDoc(docRef).then((docSnap) => {
           if (!docSnap.exists()) {
+            //delete once the preference page is done
             setDoc(doc(db, "user", user.uid), {
               name: "",
               //To be added
@@ -75,7 +76,7 @@ function App() {
         <Route element={<SignupPage />} path='/signup'></Route>
         <Route element={<SetProfilePage user={user}/>} path='/setprofile'></Route>
         <Route element={<EventPage />} path='/event'></Route>
-        <Route element={<ProfilePage />} path='/profile'></Route>
+        <Route element={<ProfilePage user={user}/>} path='/profile'></Route>
         <Route element={<SetProfilePage user={user}/>} path='/setprofile'></Route>
 
       </Routes>
