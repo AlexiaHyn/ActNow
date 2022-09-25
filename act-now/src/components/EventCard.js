@@ -10,6 +10,20 @@ export default function EventCard(props) {
   const [tags, setTags] = useState([]);
   let navigate = useNavigate();
 
+  
+  var logodict = {'Gender Equality': <img src={"../images/gender equality.png"} style={{objectFit: "contain", maxHeight: "40px"}}></img>,
+  'Environment': <img src={"../images/environment.png"} style={{objectFit: "contain", maxHeight: "40px"}}></img>,
+  'LGBTQ+': <img src={"../images/lgbtq+.png"} style={{objectFit: "contain", maxHeight: "40px"}}></img>,
+  'Racial Justice': <img src={"../images/racial justice.png"} style={{objectFit: "contain", maxHeight: "40px"}}></img>,
+  'Health': <img src={"../images/health.png"} style={{objectFit: "contain", maxHeight: "40px"}}></img>,
+  'Social Policy': <img src={"../images/social policy.png"} style={{objectFit: "contain", maxHeight: "40px"}}></img>,
+  'Civil Rights': <img src={"../images/racial justice.png"} style={{objectFit: "contain", maxHeight: "40px"}}></img>,
+  'Education': <img src={"../images/education.png"} style={{objectFit: "contain", maxHeight: "40px"}}></img>,
+  'Poverty': <img src={"../images/poverty.png"} style={{objectFit: "contain", maxHeight: "40px"}}></img>,
+  'Animals': <img src={"../images/animal.png"} style={{objectFit: "contain", maxHeight: "40px"}}></img>,
+  'Anti-War': <img src={"../images/peace.png"} style={{objectFit: "contain", maxHeight: "40px"}}></img>,
+  'Energy': <img src={"../images/energy.png"} style={{objectFit: "contain", maxHeight: "40px"}}></img>}
+
   useEffect(()=>{
     handleTags(props.tags);
   }, [])
