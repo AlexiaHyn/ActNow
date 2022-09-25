@@ -216,3 +216,34 @@
 
     color: white;
 }
+
+.event {
+
+    padding: 20px;
+    margin: 10px;
+    height: 50%;
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.fixed-btn0 {
+    position: absolute;
+    bottom: 10%;
+    right: 50%;
+}
+
+.fixed-btn1 {
+    position: absolute;
+    bottom: 10%;
+    right: 10%;
+}
+
+
+.fixed-btn2 {
+    position: absolute;
+    bottom: 10%;
+    right: 30%;
+}

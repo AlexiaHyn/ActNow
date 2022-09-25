@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export default function EventCard(props) {
   const [collected, setCollected] = useState(false);
   const [going, setGoing] = useState(false);
+  let navigate = useNavigate();
+
+
   return (
     <div className='card rounded event-card'>
       <div className='d-flex justify-content-between'>
@@ -12,7 +16,7 @@ export default function EventCard(props) {
       <div>Event shoorrrrrt Introoooo</div>
       <div>tags</div>
       <div className='d-flex align-items-center justify-content-end'>
-        <button type='button' className={'btn btn-outline-secondary'}>Learn more</button>
+        <button type='button' className={'btn btn-outline-secondary'} onClick={() => navigate('/event/' + props.id)}>Learn more</button>
         <button type='button' className={'btn ms-1 ' + `${going ? "btn-outline-dark" : "btn-dark"}`} onClick={() => setGoing(!going)}>
           {
             going ?
