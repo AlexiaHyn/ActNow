@@ -6,18 +6,18 @@ export default function MainPage() {
   return (
     <div className='pt-5 Poppins'>
       <div className='pt-3'>
-        <SearchBar/>
+        <SearchBar />
       </div>
-      
+
       <div className='d-flex flex-wrap'>
-        <EventCard/>
-        <EventCard/>
-        <EventCard/>
-        <EventCard/>
-        <EventCard/>
-        <EventCard/>
+        <EventCard />
+        <EventCard />
+        <EventCard />
+        <EventCard />
+        <EventCard />
+        <EventCard />
       </div>
-    
+
     </div>
   )
 }

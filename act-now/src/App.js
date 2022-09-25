@@ -75,12 +75,12 @@ function App() {
         <Route element={<LoginPage />} path='/login'></Route>
         <Route element={<SignupPage />} path='/signup'></Route>
         <Route element={<SetProfilePage user={user} />} path='/setprofile'></Route>
-        <Route element={<EventPage id={ } />} path='/event'></Route>
+        <Route element={<EventPage />} path='/event'></Route>
         <Route element={<ProfilePage user={user} />} path='/profile'></Route>
         <Route element={<SetProfilePage user={user} />} path='/setprofile'></Route>
 
       </Routes>
-
+      {/* '/events/:id' */}
     </div>
   );
 }

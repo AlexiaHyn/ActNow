@@ -23,9 +23,9 @@ export default function EventPage(props) {
                     <div>Tags: {props.tags}</div>
                     <div className='d-flex align-items-center justify-content-end'>
                         {/* <button onClick={History.back()}>Back</button> */}
-                        <button type='button' className={'btn btn-outline-secondary fixed-btn0'} onClick={() => navigate('/')}>Back to all events</button>
-                        <button type='button' className={'btn btn-outline-secondary fixed-btn1'}>Chat with host</button>
-                        <button type='button' className={'btn btn-outline-secondary fixed-btn2'}>Register now</button>
+                        <button type='button' className={'btn btn-outline-secondary'} onClick={() => navigate('/')}>Back to all events</button>
+                        <button type='button' className={'btn btn-outline-secondary'}>Chat with host</button>
+                        <button type='button' className={'btn btn-outline-secondary'}>Register now</button>
                     </div>
                 </div>
             </div>
