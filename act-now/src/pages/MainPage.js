@@ -5,6 +5,7 @@ import InitiateEvent from '../components/InitiateEvent';
 import { collection, query, where, getDocs, limit, doc, getDoc, orderBy} from "firebase/firestore";
 import { db } from '../firebase/firebase'
 import { useEffect, useState } from 'react'
+import Tooltip from '@mui/material/Tooltip';
 import { unstable_deprecatedPropType } from '@mui/utils';
 
 export default function MainPage(props) {
@@ -189,9 +190,11 @@ export default function MainPage(props) {
 
   return (
     <div className='pt-5 poppins'>
-      <div className='initiate-wrapper'>
-        <InitiateEvent />
-      </div>
+      <Tooltip title = "initiate an event">
+        <div className='initiate-wrapper'>
+          <InitiateEvent />
+        </div>
+      </Tooltip>
 
       <div className='pt-3'>
         <SearchBar searchCards={searchCards} />
