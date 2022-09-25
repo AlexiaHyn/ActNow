@@ -23,7 +23,19 @@ export default function InitiatePage(props) {
       intro: intro,
       description: description,
       creator: props.user.uid,
-      num: 1
+      num: 1,
+      tags: {'Gender Equality': preferences[0],
+             'Environment': preferences[1],
+             'LGBTQ+': preferences[2],
+             'Racial Justice': preferences[3],
+             'Health': preferences[4],
+             'Social Policy': preferences[5],
+             'Civil Rights': preferences[6],
+             'Education': preferences[7],
+             'Poverty': preferences[8],
+             'Animals': preferences[9],
+             'Anti-War': preferences[10],
+             'Energy': preferences[11],}
     });
     await setDoc(doc(db, 'events', docRef.id), {id:docRef.id}, {merge: true})
     alert('event added')
