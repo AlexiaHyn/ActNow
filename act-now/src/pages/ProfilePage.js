@@ -61,7 +61,7 @@ export default function ProfilePage(props) {
             }
           });
         })
-        setCreate(newArr)
+        setCreate([...create], newArr)
       })
       const q2 = query(collection(db, "user", props.user.uid, "joined"));
       getDocs(q2).then((snapshots) => {
@@ -78,7 +78,7 @@ export default function ProfilePage(props) {
             }
           });
         })
-        setJoined(newArr)
+        setJoined([...joined], newArr)
       })
       const q3 = query(collection(db, "user", props.user.uid, "starred"));
       getDocs(q3).then((snapshots) => {
@@ -93,7 +93,7 @@ export default function ProfilePage(props) {
             }
           });
         })
-        setStarred(newArr)
+        setStarred([...starred], newArr)
       })
     }, []);
     function handleImageChange(e){
