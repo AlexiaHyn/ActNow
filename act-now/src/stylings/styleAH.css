@@ -74,4 +74,18 @@
 .input{
     border: none;
     border-bottom: 1px solid #212121;
+    color: #212121;
+}
+
+.nav-pills .nav-item .nav-link.active {
+    background-color: #383838;
+  }
+
+.nav-pills .nav-item .nav-link{
+    color: #212121;
+}
+
+.line-segment{
+    border-bottom: 2px solid #d5d5d5;
+    width: 100vw;
 }
