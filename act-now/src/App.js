@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { Route, Routes, BrowserRouter, useNavigate } from "react-router-dom";
 import Navbar from './components/Navbar';
 
 import "./stylings/styleAH.css";
@@ -26,6 +26,7 @@ import { createBrowserHistory } from "history";
 function App() {
   const [user, setUser] = useState(null);
   const [isUserUpdated, setIsUserUpdated] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -48,7 +49,7 @@ function App() {
               id: user.uid,
               //To be added
             }).then(
-              //send to preference page
+              navigate("/setprofile")
             );
           }
         })
