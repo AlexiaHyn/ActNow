@@ -56,11 +56,12 @@ export default function ProfilePage(props) {
           getDoc(eventDoc).then((docSnap) => {
             if(docSnap.exists()){
               const docData = docSnap.data();
+              console.log(docData['title'])
               newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
             }
           });
         })
-        setCreate([...create], newArr)
+        setCreate(newArr)
       })
       const q2 = query(collection(db, "user", props.user.uid, "joined"));
       getDocs(q2).then((snapshots) => {
@@ -70,12 +71,14 @@ export default function ProfilePage(props) {
           const eventDoc = doc(db, "events", eventID);
           getDoc(eventDoc).then((docSnap) => {
             if(docSnap.exists()){
+              
               const docData = docSnap.data();
+              console.log(docData['title'])
               newArr.push(<EventCard key={docData['id']} title={docData['title']} date={docData['date']} time={docData['time']} location={docData['location']} intro={docData['intro']} tags={docData['tags']} id={docData['id']} creator={docData['creator']} user={props.user}/>);
             }
           });
         })
-        setJoined([...joined], newArr)
+        setJoined(newArr)
       })
       const q3 = query(collection(db, "user", props.user.uid, "starred"));
       getDocs(q3).then((snapshots) => {
@@ -90,9 +93,9 @@ export default function ProfilePage(props) {
             }
           });
         })
-        setStarred([...starred], newArr)
+        setStarred(newArr)
       })
-    }, [props.user]);
+    }, []);
     function handleImageChange(e){
         e.preventDefault();
         const choose = e.target.files[0];
